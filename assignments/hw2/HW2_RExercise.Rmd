@@ -1,0 +1,63 @@
+---
+title: "Homework 2 - R Exercises"
+output: html_notebook
+---
+
+## Exercise 3.
+```{r}
+# Scan and get name of all CSV files
+fnames = list.files(path = "specdata/.", pattern = "*.csv")
+# Sum of sulfate values in all CSV files
+sum_sulfate = 0
+# Number of monitored days
+observered_days = 0
+# Calculating sum of sulfate values and number of observered days
+for (i in 1:length(fnames)) {
+  # Read i-th CSV file into R
+  assign(fnames[i], read.csv(paste("specdata/", fnames[i], sep = "")))
+  # Get sulfate values in i-th CSV file
+  sulfate_values = get(fnames[i])$sulfate
+  # Summing available values of sulfate
+  sum_sulfate = sum_sulfate + sum(sulfate_values, na.rm = T)
+  # Calculate number of observered days
+  for (j in 1:length(sulfate_values)) {
+    if (!is.na(sulfate_values[j]))
+      observered_days = observered_days + 1
+  }
+}
+
+# Mean of sulfate across all locations for all days
+sum_sulfate/observered_days
+```
+
+## Exercise 4.
+
+#### 4.1
+```{r}
+
+```
+</br>
+
+#### 4.2
+```{r}
+
+```
+</br>
+
+#### 4.3
+```{r}
+
+```
+</br>
+
+#### 4.4
+```{r}
+
+```
+</br>
+
+#### 4.5
+```{r}
+
+```
+</br>
