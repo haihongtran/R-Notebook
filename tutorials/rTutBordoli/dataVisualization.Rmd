@@ -1,0 +1,34 @@
+---
+title: "Data loading and visualization"
+output: html_notebook
+---
+
+## Notebook usage
+
+* Running all code chunk: *Ctrl+Shift+Enter*.
+
+* Running one line on cursor: *Ctrl+Enter*.
+
+* Running the whole note book: *Ctrl+Alt+R*.
+
+* New chunk: *Ctrl+Alt+I*.
+
+## Code section
+
+```{r}
+# Load data from file
+dataframe <- read.table("plotdata.txt", header = T)
+# See names of variables in data frame
+names(dataframe)
+# Attach data objects in data frame into R environment
+attach(dataframe)
+# Simplest plot
+plot(x, y)
+# Plotting with labels
+plot(x, y, xlab = "x label", ylab = "y label")
+# Changing orientation of axis values
+plot(x, y, las = 1) # las can be {0, 1, 2, 3}
+# Change font size of x and y labels
+plot(x, y, cex.lab = 2)
+```
+

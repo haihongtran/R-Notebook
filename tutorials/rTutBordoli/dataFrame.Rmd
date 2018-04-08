@@ -1,0 +1,56 @@
+---
+title: "Data Frame"
+output: html_notebook
+---
+
+## Notebook usage
+
+* Running all code chunk: *Ctrl+Shift+Enter*.
+
+* Running one line on cursor: *Ctrl+Enter*.
+
+* Running the whole note book: *Ctrl+Alt+R*.
+
+* New chunk: *Ctrl+Alt+I*.
+
+## Code section
+
+#### Read data from text file
+```{r}
+worms <- read.table("worms.txt", header = T, row.names = 1)
+names(worms)
+attach(worms) # Make variables in worms accessible by name
+worms
+summary(worms)  # Basic statistics of worms
+```
+</br>
+
+#### Select parts of data frame
+```{r}
+# Select first three column of data frame
+worms[, 1:3]
+# Select certain rows based on logical tests on variable values
+worms[Area > 3 & Slope < 3,]
+```
+</br>
+
+#### Ordering dataframe
+```{r}
+# Return row indices in incresaing order of column 1 values (Area)
+order(worms[,1])
+# Sort dataframe in increasing order of column 1 values (Area)
+worms[order(worms[,1]),]
+# Sort dataframe in decreasing order of column 1 values (Area) and select few columns
+worms[rev(order(worms[,1])), c(1, 4, 6)]
+```
+</br>
+
+*__NOTE:__ Never use sort() for variable that are part of a dataframe. Just use order().*
+
+</br>
+
+#### Good practice
+```{r}
+# Detach variables in worms dataframe after use
+detach(worms)
+```

@@ -1,0 +1,88 @@
+---
+title: "R Vector"
+output: html_notebook
+---
+
+## Notebook usage
+
+* Running all code chunk: *Ctrl+Shift+Enter*.
+
+* Running one line on cursor: *Ctrl+Enter*.
+
+* Running the whole note book: *Ctrl+Alt+R*.
+
+* New chunk: *Ctrl+Alt+I*.
+
+## Code section
+
+#### Creating some vectors
+```{r}
+y<-c(5,7,7,8,2,5,6,6,7,5,8,3,4)
+x<-13:1
+```
+</br>
+
+#### Basic statistics
+```{r}
+mean(y)
+var(x)
+```
+</br>
+
+#### Operations done on all elements of vector
+```{r}
+y*6
+c(y, x)
+```
+</br>
+
+#### Getting elements of vector
+```{r}
+# Fourth element
+y[4]
+# Third to seventh elements
+y[3:7]
+# Individual elements
+y[c(3, 5, 7, 8)]
+# Drop an element
+y[-4]
+# Drop first and fourth elements
+y[c(-1, -4)]
+# Drop the last element
+y[-length(y)]
+# Get a subset of vector
+y[y>6]
+# The values of x for which y>6
+x[y>6]
+# Elements of y which is not multiples of three
+y[y%%3 != 0]
+```
+</br>
+
+#### Create a three-dimensional array
+```{r}
+A <- array(1:30, c(5,3,2))
+A
+```
+</br>
+
+#### Select elements of A
+```{r}
+# Third to fifth rows of 2 tables
+A[3:5, ,]
+# First and third columns of 2 tables
+A[,c(1,3),]
+# Select second table
+A[,,2]
+# Selection of some elements in the tables
+A[2:4, c(1,3), 2]
+```
+</br>
+
+#### Good practice
+```{r}
+# Remove variables after use
+rm(A,x,y)
+# Remove all variables
+# rm(list = ls())
+```

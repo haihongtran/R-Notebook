@@ -1,0 +1,85 @@
+---
+title: "R - Data Processing"
+output: html_notebook
+---
+
+## Notebook usage
+
+* Running all code chunk: *Ctrl+Shift+Enter*.
+
+* Running one line on cursor: *Ctrl+Enter*.
+
+* Running the whole note book: *Ctrl+Alt+R*.
+
+* New chunk: *Ctrl+Alt+I*.
+
+## Code section
+
+#### Read data into R
+```{r}
+SATGPA20R = read.table("SATGPA20.txt", header = T)
+SATGPA20R
+```
+</br>
+
+#### Some statistics of data
+```{r}
+apply(SATGPA20R, 2, mean)
+attach(SATGPA20R) # Make objects in SATGPA20R searchable
+mean(GPA)
+```
+</br>
+
+#### Create a data frame and perform mean calculation
+```{r}
+IQ = c(110, 95, 140, 89, 102)
+CS = c(59, 40, 62, 40, 55)		
+WQ = c(2, 4, 5, 1, 3)
+all_data = data.frame(IQ, CS, WQ)
+all_data
+apply(all_data, 2, mean)
+```
+</br>
+
+#### Handling missing data
+```{r}
+data = c(2, 4, 6, NA, 10)
+mean(data, na.rm = T)
+```
+</br>
+
+#### Handling missing values data frame
+```{r}
+SATGPA25R = read.table("SATGPA25.txt", header = T)
+SATGPA25R
+apply(SATGPA25R, 2, mean, na.rm = T)
+```
+</br>
+
+#### Graphs
+```{r}
+hist(SATM)
+boxplot(SATM)
+boxplot(SATV, SATM)
+```
+</br>
+
+#### More graphs
+```{r}
+RS = c(12, 14, 16, 18, 25)  # x
+MS = c(10, 8, 16, 12, 20)   # y
+plot(RS, MS)
+# Line of best fit
+res = lm(MS~RS) # fitting linear model
+abline(res)
+```
+</br>
+
+#### Controlling graphs
+```{r}
+plot(RS, MS, xlim = c(10,25), ylim = c(5, 25))
+plot(RS, MS, pch = 3)
+plot(RS, MS, pch = 3, lwd = 5)
+plot(RS, MS, xlab = "Reading score", ylab = "Math score")
+```
+
