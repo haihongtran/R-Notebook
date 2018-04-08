@@ -1,0 +1,33 @@
+---
+title: "Basics of arulesViz package"
+output: html_notebook
+---
+
+```{r}
+# Load titanic dataset
+titanic = read.table("titanic/Dataset.data.gz", header = F)
+```
+
+
+```{r}
+# Name of objects in titanic dataset
+names(titanic)
+# Change name of objects in titanic dataset
+names(titanic) = c("Class", "Age", "Sex", "Survived")
+names(titanic)
+```
+
+```{r}
+# Load arules package
+library("arules")
+# Apply apriori algorithm to mine association rules
+rules <- apriori(titanic, control=list(verbose=F), parameter=list(minlen=2, supp=0.005, conf=0.8), appearance=list(rhs=c("Survived=no", "Survived=yes"), default="lhs"))
+```
+
+```{r}
+# Load arulesViz package
+library("arulesViz")
+# Plot the rules
+plot(rules)
+```
+
