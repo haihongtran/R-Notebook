@@ -32,7 +32,7 @@ sprintf("Mean value of sulfate is %f", sum_sulfate/observered_days)
 
 ## Exercise 4. Groceries data set with arules package
 
-#### 4.1
+#### 4.1. Obtain some information about data set
 ```{r}
 # Load arules package
 library("arules")
@@ -50,25 +50,25 @@ inspect(Groceries[1:5])
 ```
 </br>
 
-#### 4.2
+#### 4.2. Mine all association rules with min_sup = 0.001 and min_conf = 0.8
+```{r}
+rules = apriori(Groceries, parameter = list(support = 0.001, confidence = 0.8))
+```
+</br>
+
+#### 4.3. Draw scatter plot for all association rules
 ```{r}
 
 ```
 </br>
 
-#### 4.3
+#### 4.4. Print top-3 association rules according to the lift
 ```{r}
 
 ```
 </br>
 
-#### 4.4
-```{r}
-
-```
-</br>
-
-#### 4.5
+#### 4.5. Draw top-3 association rules as a graph such that a node becomes an item
 ```{r}
 
 ```

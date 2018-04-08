@@ -209,8 +209,8 @@ sprintf(&quot;Mean value of sulfate is %f&quot;, sum_sulfate/observered_days)</c
 </div>
 <div id="exercise-4.-groceries-data-set-with-arules-package" class="section level2">
 <h2>Exercise 4. Groceries data set with arules package</h2>
-<div id="section" class="section level4">
-<h4>4.1</h4>
+<div id="obtain-some-information-about-data-set" class="section level4">
+<h4>4.1. Obtain some information about data set</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMb2FkIGFydWxlcyBwYWNrYWdlXG5saWJyYXJ5KFwiYXJ1bGVzXCIpXG4jIExvYWQgZ3JvY2VyaWVzIGRhdGEgc2V0XG5kYXRhKFwiR3JvY2VyaWVzXCIpXG4jIChpKSBNb3N0IGZyZXF1ZW50IGl0ZW0gKFdlIGNhbiBhbHNvIGdldCB0aGlzIGZyb20gc3VtbWFyeShHcm9jZXJpZXMpKVxuR3JvY1RpZExpc3RzIDwtIGFzKEdyb2NlcmllcywgXCJ0aWRMaXN0c1wiKVxubW9zdEZyZXF1ZW50SXRlbSA9IEdyb2NUaWRMaXN0c1t3aGljaC5tYXgoc2l6ZShHcm9jVGlkTGlzdHMpKV1cbnByaW50KHBhc3RlKFwiTW9zdCBmcmVxdWVudCBpdGVtIGlzXCIsIGl0ZW1MYWJlbHMobW9zdEZyZXF1ZW50SXRlbSkpKVxuYGBgIn0= -->
@@ -250,32 +250,56 @@ inspect(Groceries[1:5])</code></pre>
 <!-- rnb-text-begin -->
 <p></br></p>
 </div>
-<div id="section-1" class="section level4">
-<h4>4.2</h4>
+<div id="mine-all-association-rules-with-min_sup-0.001-and-min_conf-0.8" class="section level4">
+<h4>4.2. Mine all association rules with min_sup = 0.001 and min_conf = 0.8</h4>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucnVsZXMgPSBhcHJpb3JpKEdyb2NlcmllcywgcGFyYW1ldGVyID0gbGlzdChzdXBwb3J0ID0gMC4wMDEsIGNvbmZpZGVuY2UgPSAwLjgpKVxuYGBgIn0= -->
+<pre class="r"><code>rules = apriori(Groceries, parameter = list(support = 0.001, confidence = 0.8))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiQXByaW9yaVxuXG5QYXJhbWV0ZXIgc3BlY2lmaWNhdGlvbjpcbiBjb25maWRlbmNlIG1pbnZhbCBzbWF4IGFyZW0gIGF2YWwgb3JpZ2luYWxTdXBwb3J0IG1heHRpbWUgc3VwcG9ydCBtaW5sZW4gbWF4bGVuIHRhcmdldCAgIGV4dFxuICAgICAgICAwLjggICAgMC4xICAgIDEgbm9uZSBGQUxTRSAgICAgICAgICAgIFRSVUUgICAgICAgNSAgIDAuMDAxICAgICAgMSAgICAgMTAgIHJ1bGVzIEZBTFNFXG5cbkFsZ29yaXRobWljIGNvbnRyb2w6XG4gZmlsdGVyIHRyZWUgaGVhcCBtZW1vcHQgbG9hZCBzb3J0IHZlcmJvc2VcbiAgICAwLjEgVFJVRSBUUlVFICBGQUxTRSBUUlVFICAgIDIgICAgVFJVRVxuXG5BYnNvbHV0ZSBtaW5pbXVtIHN1cHBvcnQgY291bnQ6IDkgXG5cbnNldCBpdGVtIGFwcGVhcmFuY2VzIC4uLlswIGl0ZW0ocyldIGRvbmUgWzAuMDBzXS5cbnNldCB0cmFuc2FjdGlvbnMgLi4uWzE2OSBpdGVtKHMpLCA5ODM1IHRyYW5zYWN0aW9uKHMpXSBkb25lIFswLjAwc10uXG5zb3J0aW5nIGFuZCByZWNvZGluZyBpdGVtcyAuLi4gWzE1NyBpdGVtKHMpXSBkb25lIFswLjAwc10uXG5jcmVhdGluZyB0cmFuc2FjdGlvbiB0cmVlIC4uLiBkb25lIFswLjAxc10uXG5jaGVja2luZyBzdWJzZXRzIG9mIHNpemUgMSAyIDMgNCA1IDYgZG9uZSBbMC4wMXNdLlxud3JpdGluZyAuLi4gWzQxMCBydWxlKHMpXSBkb25lIFswLjAwc10uXG5jcmVhdGluZyBTNCBvYmplY3QgIC4uLiBkb25lIFswLjAwc10uXG4ifQ== -->
+<pre><code>Apriori
+
+Parameter specification:
+ confidence minval smax arem  aval originalSupport maxtime support minlen maxlen target   ext
+        0.8    0.1    1 none FALSE            TRUE       5   0.001      1     10  rules FALSE
+
+Algorithmic control:
+ filter tree heap memopt load sort verbose
+    0.1 TRUE TRUE  FALSE TRUE    2    TRUE
+
+Absolute minimum support count: 9 
+
+set item appearances ...[0 item(s)] done [0.00s].
+set transactions ...[169 item(s), 9835 transaction(s)] done [0.00s].
+sorting and recoding items ... [157 item(s)] done [0.00s].
+creating transaction tree ... done [0.01s].
+checking subsets of size 1 2 3 4 5 6 done [0.01s].
+writing ... [410 rule(s)] done [0.00s].
+creating S4 object  ... done [0.00s].</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p></br></p>
+</div>
+<div id="draw-scatter-plot-for-all-association-rules" class="section level4">
+<h4>4.3. Draw scatter plot for all association rules</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p></br></p>
 </div>
-<div id="section-2" class="section level4">
-<h4>4.3</h4>
+<div id="print-top-3-association-rules-according-to-the-lift" class="section level4">
+<h4>4.4. Print top-3 association rules according to the lift</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p></br></p>
 </div>
-<div id="section-3" class="section level4">
-<h4>4.4</h4>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p></br></p>
-</div>
-<div id="section-4" class="section level4">
-<h4>4.5</h4>
+<div id="draw-top-3-association-rules-as-a-graph-such-that-a-node-becomes-an-item" class="section level4">
+<h4>4.5. Draw top-3 association rules as a graph such that a node becomes an item</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-chunk-end -->
@@ -285,7 +309,7 @@ inspect(Groceries[1:5])</code></pre>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSG9tZXdvcmsgMiAtIFIgRXhlcmNpc2VzIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyBFeGVyY2lzZSAzLiBNZWFuIG9mIHN1bGZhdGUgdmFsdWVzIGluIHBvbGx1dGlvbiBtb25pdG9yaW5nIGRhdGEKYGBge3J9CiMgU2NhbiBhbmQgZ2V0IG5hbWUgb2YgYWxsIENTViBmaWxlcwpmbmFtZXMgPSBsaXN0LmZpbGVzKHBhdGggPSAic3BlY2RhdGEvLiIsIHBhdHRlcm4gPSAiKi5jc3YiKQojIFN1bSBvZiBzdWxmYXRlIHZhbHVlcyBpbiBhbGwgQ1NWIGZpbGVzCnN1bV9zdWxmYXRlID0gMAojIE51bWJlciBvZiBtb25pdG9yZWQgZGF5cwpvYnNlcnZlcmVkX2RheXMgPSAwCiMgQ2FsY3VsYXRpbmcgc3VtIG9mIHN1bGZhdGUgdmFsdWVzIGFuZCBudW1iZXIgb2Ygb2JzZXJ2ZXJlZCBkYXlzCmZvciAoaSBpbiAxOmxlbmd0aChmbmFtZXMpKSB7CiAgIyBSZWFkIGktdGggQ1NWIGZpbGUgaW50byBSCiAgYXNzaWduKGZuYW1lc1tpXSwgcmVhZC5jc3YocGFzdGUoInNwZWNkYXRhLyIsIGZuYW1lc1tpXSwgc2VwID0gIiIpKSkKICAjIEdldCBzdWxmYXRlIHZhbHVlcyBpbiBpLXRoIENTViBmaWxlCiAgc3VsZmF0ZV92YWx1ZXMgPSBnZXQoZm5hbWVzW2ldKSRzdWxmYXRlCiAgIyBTdW1taW5nIGF2YWlsYWJsZSB2YWx1ZXMgb2Ygc3VsZmF0ZQogIHN1bV9zdWxmYXRlID0gc3VtX3N1bGZhdGUgKyBzdW0oc3VsZmF0ZV92YWx1ZXMsIG5hLnJtID0gVCkKICAjIENhbGN1bGF0ZSBudW1iZXIgb2Ygb2JzZXJ2ZXJlZCBkYXlzCiAgZm9yIChqIGluIDE6bGVuZ3RoKHN1bGZhdGVfdmFsdWVzKSkgewogICAgaWYgKCFpcy5uYShzdWxmYXRlX3ZhbHVlc1tqXSkpCiAgICAgIG9ic2VydmVyZWRfZGF5cyA9IG9ic2VydmVyZWRfZGF5cyArIDEKICB9Cn0KCiMgTWVhbiBvZiBzdWxmYXRlIGFjcm9zcyBhbGwgbG9jYXRpb25zIGZvciBhbGwgZGF5cwpzcHJpbnRmKCJNZWFuIHZhbHVlIG9mIHN1bGZhdGUgaXMgJWYiLCBzdW1fc3VsZmF0ZS9vYnNlcnZlcmVkX2RheXMpCmBgYAoKIyMgRXhlcmNpc2UgNC4gR3JvY2VyaWVzIGRhdGEgc2V0IHdpdGggYXJ1bGVzIHBhY2thZ2UKCiMjIyMgNC4xCmBgYHtyfQojIExvYWQgYXJ1bGVzIHBhY2thZ2UKbGlicmFyeSgiYXJ1bGVzIikKIyBMb2FkIGdyb2NlcmllcyBkYXRhIHNldApkYXRhKCJHcm9jZXJpZXMiKQojIChpKSBNb3N0IGZyZXF1ZW50IGl0ZW0gKFdlIGNhbiBhbHNvIGdldCB0aGlzIGZyb20gc3VtbWFyeShHcm9jZXJpZXMpKQpHcm9jVGlkTGlzdHMgPC0gYXMoR3JvY2VyaWVzLCAidGlkTGlzdHMiKQptb3N0RnJlcXVlbnRJdGVtID0gR3JvY1RpZExpc3RzW3doaWNoLm1heChzaXplKEdyb2NUaWRMaXN0cykpXQpwcmludChwYXN0ZSgiTW9zdCBmcmVxdWVudCBpdGVtIGlzIiwgaXRlbUxhYmVscyhtb3N0RnJlcXVlbnRJdGVtKSkpCiMgKGlpKSBMZW5ndGggb2YgbG9uZ2VzdCB0cmFuc2FjdGlvbnMKbGVuZ3RoX2xvbmdlc3QgPSBtYXgoc2l6ZShHcm9jZXJpZXMpKQpzcHJpbnRmKCJMZW5ndGggb2YgbG9uZ2VzdCB0cmFuc2FjdGlvbnMgaXMgJWQiLCBsZW5ndGhfbG9uZ2VzdCkKIyAoaWlpKSBGaXJzdCBmaXZlIHRyYW5zYWN0aW9ucyAodHJhbnNhY3Rpb25JbmZvKCkgZG9lcyBub3QgZ2l2ZSBhbnkgaW5mb3JtYXRpb24pCmluc3BlY3QoR3JvY2VyaWVzWzE6NV0pCmBgYAo8L2JyPgoKIyMjIyA0LjIKYGBge3J9CgpgYGAKPC9icj4KCiMjIyMgNC4zCmBgYHtyfQoKYGBgCjwvYnI+CgojIyMjIDQuNApgYGB7cn0KCmBgYAo8L2JyPgoKIyMjIyA0LjUKYGBge3J9CgpgYGAKPC9icj4K</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSG9tZXdvcmsgMiAtIFIgRXhlcmNpc2VzIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyBFeGVyY2lzZSAzLiBNZWFuIG9mIHN1bGZhdGUgdmFsdWVzIGluIHBvbGx1dGlvbiBtb25pdG9yaW5nIGRhdGEKYGBge3J9CiMgU2NhbiBhbmQgZ2V0IG5hbWUgb2YgYWxsIENTViBmaWxlcwpmbmFtZXMgPSBsaXN0LmZpbGVzKHBhdGggPSAic3BlY2RhdGEvLiIsIHBhdHRlcm4gPSAiKi5jc3YiKQojIFN1bSBvZiBzdWxmYXRlIHZhbHVlcyBpbiBhbGwgQ1NWIGZpbGVzCnN1bV9zdWxmYXRlID0gMAojIE51bWJlciBvZiBtb25pdG9yZWQgZGF5cwpvYnNlcnZlcmVkX2RheXMgPSAwCiMgQ2FsY3VsYXRpbmcgc3VtIG9mIHN1bGZhdGUgdmFsdWVzIGFuZCBudW1iZXIgb2Ygb2JzZXJ2ZXJlZCBkYXlzCmZvciAoaSBpbiAxOmxlbmd0aChmbmFtZXMpKSB7CiAgIyBSZWFkIGktdGggQ1NWIGZpbGUgaW50byBSCiAgYXNzaWduKGZuYW1lc1tpXSwgcmVhZC5jc3YocGFzdGUoInNwZWNkYXRhLyIsIGZuYW1lc1tpXSwgc2VwID0gIiIpKSkKICAjIEdldCBzdWxmYXRlIHZhbHVlcyBpbiBpLXRoIENTViBmaWxlCiAgc3VsZmF0ZV92YWx1ZXMgPSBnZXQoZm5hbWVzW2ldKSRzdWxmYXRlCiAgIyBTdW1taW5nIGF2YWlsYWJsZSB2YWx1ZXMgb2Ygc3VsZmF0ZQogIHN1bV9zdWxmYXRlID0gc3VtX3N1bGZhdGUgKyBzdW0oc3VsZmF0ZV92YWx1ZXMsIG5hLnJtID0gVCkKICAjIENhbGN1bGF0ZSBudW1iZXIgb2Ygb2JzZXJ2ZXJlZCBkYXlzCiAgZm9yIChqIGluIDE6bGVuZ3RoKHN1bGZhdGVfdmFsdWVzKSkgewogICAgaWYgKCFpcy5uYShzdWxmYXRlX3ZhbHVlc1tqXSkpCiAgICAgIG9ic2VydmVyZWRfZGF5cyA9IG9ic2VydmVyZWRfZGF5cyArIDEKICB9Cn0KCiMgTWVhbiBvZiBzdWxmYXRlIGFjcm9zcyBhbGwgbG9jYXRpb25zIGZvciBhbGwgZGF5cwpzcHJpbnRmKCJNZWFuIHZhbHVlIG9mIHN1bGZhdGUgaXMgJWYiLCBzdW1fc3VsZmF0ZS9vYnNlcnZlcmVkX2RheXMpCmBgYAoKIyMgRXhlcmNpc2UgNC4gR3JvY2VyaWVzIGRhdGEgc2V0IHdpdGggYXJ1bGVzIHBhY2thZ2UKCiMjIyMgNC4xLiBPYnRhaW4gc29tZSBpbmZvcm1hdGlvbiBhYm91dCBkYXRhIHNldApgYGB7cn0KIyBMb2FkIGFydWxlcyBwYWNrYWdlCmxpYnJhcnkoImFydWxlcyIpCiMgTG9hZCBncm9jZXJpZXMgZGF0YSBzZXQKZGF0YSgiR3JvY2VyaWVzIikKIyAoaSkgTW9zdCBmcmVxdWVudCBpdGVtIChXZSBjYW4gYWxzbyBnZXQgdGhpcyBmcm9tIHN1bW1hcnkoR3JvY2VyaWVzKSkKR3JvY1RpZExpc3RzIDwtIGFzKEdyb2NlcmllcywgInRpZExpc3RzIikKbW9zdEZyZXF1ZW50SXRlbSA9IEdyb2NUaWRMaXN0c1t3aGljaC5tYXgoc2l6ZShHcm9jVGlkTGlzdHMpKV0KcHJpbnQocGFzdGUoIk1vc3QgZnJlcXVlbnQgaXRlbSBpcyIsIGl0ZW1MYWJlbHMobW9zdEZyZXF1ZW50SXRlbSkpKQojIChpaSkgTGVuZ3RoIG9mIGxvbmdlc3QgdHJhbnNhY3Rpb25zCmxlbmd0aF9sb25nZXN0ID0gbWF4KHNpemUoR3JvY2VyaWVzKSkKc3ByaW50ZigiTGVuZ3RoIG9mIGxvbmdlc3QgdHJhbnNhY3Rpb25zIGlzICVkIiwgbGVuZ3RoX2xvbmdlc3QpCiMgKGlpaSkgRmlyc3QgZml2ZSB0cmFuc2FjdGlvbnMgKHRyYW5zYWN0aW9uSW5mbygpIGRvZXMgbm90IGdpdmUgYW55IGluZm9ybWF0aW9uKQppbnNwZWN0KEdyb2Nlcmllc1sxOjVdKQpgYGAKPC9icj4KCiMjIyMgNC4yLiBNaW5lIGFsbCBhc3NvY2lhdGlvbiBydWxlcyB3aXRoIG1pbl9zdXAgPSAwLjAwMSBhbmQgbWluX2NvbmYgPSAwLjgKYGBge3J9CnJ1bGVzID0gYXByaW9yaShHcm9jZXJpZXMsIHBhcmFtZXRlciA9IGxpc3Qoc3VwcG9ydCA9IDAuMDAxLCBjb25maWRlbmNlID0gMC44KSkKYGBgCjwvYnI+CgojIyMjIDQuMy4gRHJhdyBzY2F0dGVyIHBsb3QgZm9yIGFsbCBhc3NvY2lhdGlvbiBydWxlcwpgYGB7cn0KCmBgYAo8L2JyPgoKIyMjIyA0LjQuIFByaW50IHRvcC0zIGFzc29jaWF0aW9uIHJ1bGVzIGFjY29yZGluZyB0byB0aGUgbGlmdApgYGB7cn0KCmBgYAo8L2JyPgoKIyMjIyA0LjUuIERyYXcgdG9wLTMgYXNzb2NpYXRpb24gcnVsZXMgYXMgYSBncmFwaCBzdWNoIHRoYXQgYSBub2RlIGJlY29tZXMgYW4gaXRlbQpgYGB7cn0KCmBgYAo8L2JyPgo=</div>
 
 
 
