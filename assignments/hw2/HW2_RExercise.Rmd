@@ -3,7 +3,7 @@ title: "Homework 2 - R Exercises"
 output: html_notebook
 ---
 
-## Exercise 3.
+## Exercise 3. Mean of sulfate values in pollution monitoring data
 ```{r}
 # Scan and get name of all CSV files
 fnames = list.files(path = "specdata/.", pattern = "*.csv")
@@ -27,14 +27,26 @@ for (i in 1:length(fnames)) {
 }
 
 # Mean of sulfate across all locations for all days
-sum_sulfate/observered_days
+sprintf("Mean value of sulfate is %f", sum_sulfate/observered_days)
 ```
 
-## Exercise 4.
+## Exercise 4. Groceries data set with arules package
 
 #### 4.1
 ```{r}
-
+# Load arules package
+library("arules")
+# Load groceries data set
+data("Groceries")
+# (i) Most frequent item (We can also get this from summary(Groceries))
+GrocTidLists <- as(Groceries, "tidLists")
+mostFrequentItem = GrocTidLists[which.max(size(GrocTidLists))]
+print(paste("Most frequent item is", itemLabels(mostFrequentItem)))
+# (ii) Length of longest transactions
+length_longest = max(size(Groceries))
+sprintf("Length of longest transactions is %d", length_longest)
+# (iii) First five transactions (transactionInfo() does not give any information)
+inspect(Groceries[1:5])
 ```
 </br>
 

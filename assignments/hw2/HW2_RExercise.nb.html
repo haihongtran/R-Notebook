@@ -173,11 +173,11 @@ $(document).ready(function () {
 
 
 <!-- rnb-text-begin -->
-<div id="exercise-3." class="section level2">
-<h2>Exercise 3.</h2>
+<div id="exercise-3.-mean-of-sulfate-values-in-pollution-monitoring-data" class="section level2">
+<h2>Exercise 3. Mean of sulfate values in pollution monitoring data</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBTY2FuIGFuZCBnZXQgbmFtZSBvZiBhbGwgQ1NWIGZpbGVzXG5mbmFtZXMgPSBsaXN0LmZpbGVzKHBhdGggPSBcInNwZWNkYXRhLy5cIiwgcGF0dGVybiA9IFwiKi5jc3ZcIilcbiMgU3VtIG9mIHN1bGZhdGUgdmFsdWVzIGluIGFsbCBDU1YgZmlsZXNcbnN1bV9zdWxmYXRlID0gMFxuIyBOdW1iZXIgb2YgbW9uaXRvcmVkIGRheXNcbm9ic2VydmVyZWRfZGF5cyA9IDBcbiMgQ2FsY3VsYXRpbmcgc3VtIG9mIHN1bGZhdGUgdmFsdWVzIGFuZCBudW1iZXIgb2Ygb2JzZXJ2ZXJlZCBkYXlzXG5mb3IgKGkgaW4gMTpsZW5ndGgoZm5hbWVzKSkge1xuICAjIFJlYWQgaS10aCBDU1YgZmlsZSBpbnRvIFJcbiAgYXNzaWduKGZuYW1lc1tpXSwgcmVhZC5jc3YocGFzdGUoXCJzcGVjZGF0YS9cIiwgZm5hbWVzW2ldLCBzZXAgPSBcIlwiKSkpXG4gICMgR2V0IHN1bGZhdGUgdmFsdWVzIGluIGktdGggQ1NWIGZpbGVcbiAgc3VsZmF0ZV92YWx1ZXMgPSBnZXQoZm5hbWVzW2ldKSRzdWxmYXRlXG4gICMgU3VtbWluZyBhdmFpbGFibGUgdmFsdWVzIG9mIHN1bGZhdGVcbiAgc3VtX3N1bGZhdGUgPSBzdW1fc3VsZmF0ZSArIHN1bShzdWxmYXRlX3ZhbHVlcywgbmEucm0gPSBUKVxuICAjIENhbGN1bGF0ZSBudW1iZXIgb2Ygb2JzZXJ2ZXJlZCBkYXlzXG4gIGZvciAoaiBpbiAxOmxlbmd0aChzdWxmYXRlX3ZhbHVlcykpIHtcbiAgICBpZiAoIWlzLm5hKHN1bGZhdGVfdmFsdWVzW2pdKSlcbiAgICAgIG9ic2VydmVyZWRfZGF5cyA9IG9ic2VydmVyZWRfZGF5cyArIDFcbiAgfVxufVxuIyBNZWFuIG9mIHN1bGZhdGUgYWNyb3NzIGFsbCBsb2NhdGlvbnMgZm9yIGFsbCBkYXlzXG5zdW1fc3VsZmF0ZS9vYnNlcnZlcmVkX2RheXNcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBTY2FuIGFuZCBnZXQgbmFtZSBvZiBhbGwgQ1NWIGZpbGVzXG5mbmFtZXMgPSBsaXN0LmZpbGVzKHBhdGggPSBcInNwZWNkYXRhLy5cIiwgcGF0dGVybiA9IFwiKi5jc3ZcIilcbiMgU3VtIG9mIHN1bGZhdGUgdmFsdWVzIGluIGFsbCBDU1YgZmlsZXNcbnN1bV9zdWxmYXRlID0gMFxuIyBOdW1iZXIgb2YgbW9uaXRvcmVkIGRheXNcbm9ic2VydmVyZWRfZGF5cyA9IDBcbiMgQ2FsY3VsYXRpbmcgc3VtIG9mIHN1bGZhdGUgdmFsdWVzIGFuZCBudW1iZXIgb2Ygb2JzZXJ2ZXJlZCBkYXlzXG5mb3IgKGkgaW4gMTpsZW5ndGgoZm5hbWVzKSkge1xuICAjIFJlYWQgaS10aCBDU1YgZmlsZSBpbnRvIFJcbiAgYXNzaWduKGZuYW1lc1tpXSwgcmVhZC5jc3YocGFzdGUoXCJzcGVjZGF0YS9cIiwgZm5hbWVzW2ldLCBzZXAgPSBcIlwiKSkpXG4gICMgR2V0IHN1bGZhdGUgdmFsdWVzIGluIGktdGggQ1NWIGZpbGVcbiAgc3VsZmF0ZV92YWx1ZXMgPSBnZXQoZm5hbWVzW2ldKSRzdWxmYXRlXG4gICMgU3VtbWluZyBhdmFpbGFibGUgdmFsdWVzIG9mIHN1bGZhdGVcbiAgc3VtX3N1bGZhdGUgPSBzdW1fc3VsZmF0ZSArIHN1bShzdWxmYXRlX3ZhbHVlcywgbmEucm0gPSBUKVxuICAjIENhbGN1bGF0ZSBudW1iZXIgb2Ygb2JzZXJ2ZXJlZCBkYXlzXG4gIGZvciAoaiBpbiAxOmxlbmd0aChzdWxmYXRlX3ZhbHVlcykpIHtcbiAgICBpZiAoIWlzLm5hKHN1bGZhdGVfdmFsdWVzW2pdKSlcbiAgICAgIG9ic2VydmVyZWRfZGF5cyA9IG9ic2VydmVyZWRfZGF5cyArIDFcbiAgfVxufVxuIyBNZWFuIG9mIHN1bGZhdGUgYWNyb3NzIGFsbCBsb2NhdGlvbnMgZm9yIGFsbCBkYXlzXG5zcHJpbnRmKFwiTWVhbiB2YWx1ZSBvZiBzdWxmYXRlIGlzICVmXCIsIHN1bV9zdWxmYXRlL29ic2VydmVyZWRfZGF5cylcbmBgYCJ9 -->
 <pre class="r"><code># Scan and get name of all CSV files
 fnames = list.files(path = &quot;specdata/.&quot;, pattern = &quot;*.csv&quot;)
 # Sum of sulfate values in all CSV files
@@ -199,20 +199,53 @@ for (i in 1:length(fnames)) {
   }
 }
 # Mean of sulfate across all locations for all days
-sum_sulfate/observered_days</code></pre>
+sprintf(&quot;Mean value of sulfate is %f&quot;, sum_sulfate/observered_days)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDMuMTg5MzY5XG4ifQ== -->
-<pre><code>[1] 3.189369</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTWVhbiB2YWx1ZSBvZiBzdWxmYXRlIGlzIDMuMTg5MzY5XCJcbiJ9 -->
+<pre><code>[1] &quot;Mean value of sulfate is 3.189369&quot;</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="exercise-4." class="section level2">
-<h2>Exercise 4.</h2>
+<div id="exercise-4.-groceries-data-set-with-arules-package" class="section level2">
+<h2>Exercise 4. Groceries data set with arules package</h2>
 <div id="section" class="section level4">
 <h4>4.1</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMb2FkIGFydWxlcyBwYWNrYWdlXG5saWJyYXJ5KFwiYXJ1bGVzXCIpXG4jIExvYWQgZ3JvY2VyaWVzIGRhdGEgc2V0XG5kYXRhKFwiR3JvY2VyaWVzXCIpXG4jIChpKSBNb3N0IGZyZXF1ZW50IGl0ZW0gKFdlIGNhbiBhbHNvIGdldCB0aGlzIGZyb20gc3VtbWFyeShHcm9jZXJpZXMpKVxuR3JvY1RpZExpc3RzIDwtIGFzKEdyb2NlcmllcywgXCJ0aWRMaXN0c1wiKVxubW9zdEZyZXF1ZW50SXRlbSA9IEdyb2NUaWRMaXN0c1t3aGljaC5tYXgoc2l6ZShHcm9jVGlkTGlzdHMpKV1cbnByaW50KHBhc3RlKFwiTW9zdCBmcmVxdWVudCBpdGVtIGlzXCIsIGl0ZW1MYWJlbHMobW9zdEZyZXF1ZW50SXRlbSkpKVxuYGBgIn0= -->
+<pre class="r"><code># Load arules package
+library(&quot;arules&quot;)
+# Load groceries data set
+data(&quot;Groceries&quot;)
+# (i) Most frequent item (We can also get this from summary(Groceries))
+GrocTidLists &lt;- as(Groceries, &quot;tidLists&quot;)
+mostFrequentItem = GrocTidLists[which.max(size(GrocTidLists))]
+print(paste(&quot;Most frequent item is&quot;, itemLabels(mostFrequentItem)))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTW9zdCBmcmVxdWVudCBpdGVtIGlzIHdob2xlIG1pbGtcIlxuIn0= -->
+<pre><code>[1] &quot;Most frequent item is whole milk&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAoaWkpIExlbmd0aCBvZiBsb25nZXN0IHRyYW5zYWN0aW9uc1xubGVuZ3RoX2xvbmdlc3QgPSBtYXgoc2l6ZShHcm9jZXJpZXMpKVxuc3ByaW50ZihcIkxlbmd0aCBvZiBsb25nZXN0IHRyYW5zYWN0aW9ucyBpcyAlZFwiLCBsZW5ndGhfbG9uZ2VzdClcbmBgYCJ9 -->
+<pre class="r"><code># (ii) Length of longest transactions
+length_longest = max(size(Groceries))
+sprintf(&quot;Length of longest transactions is %d&quot;, length_longest)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTGVuZ3RoIG9mIGxvbmdlc3QgdHJhbnNhY3Rpb25zIGlzIDMyXCJcbiJ9 -->
+<pre><code>[1] &quot;Length of longest transactions is 32&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyAoaWlpKSBGaXJzdCBmaXZlIHRyYW5zYWN0aW9ucyAodHJhbnNhY3Rpb25JbmZvKCkgZG9lcyBub3QgZ2l2ZSBhbnkgaW5mb3JtYXRpb24pXG5pbnNwZWN0KEdyb2Nlcmllc1sxOjVdKVxuYGBgIn0= -->
+<pre class="r"><code># (iii) First five transactions (transactionInfo() does not give any information)
+inspect(Groceries[1:5])</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgIGl0ZW1zICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuWzFdIHtjaXRydXMgZnJ1aXQsc2VtaS1maW5pc2hlZCBicmVhZCxtYXJnYXJpbmUscmVhZHkgc291cHN9ICAgICAgICAgICAgIFxuWzJdIHt0cm9waWNhbCBmcnVpdCx5b2d1cnQsY29mZmVlfSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuWzNdIHt3aG9sZSBtaWxrfSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuWzRdIHtwaXAgZnJ1aXQseW9ndXJ0LGNyZWFtIGNoZWVzZSAsbWVhdCBzcHJlYWRzfSAgICAgICAgICAgICAgICAgICAgICAgIFxuWzVdIHtvdGhlciB2ZWdldGFibGVzLHdob2xlIG1pbGssY29uZGVuc2VkIG1pbGssbG9uZyBsaWZlIGJha2VyeSBwcm9kdWN0fVxuIn0= -->
+<pre><code>    items                                                                
+[1] {citrus fruit,semi-finished bread,margarine,ready soups}             
+[2] {tropical fruit,yogurt,coffee}                                       
+[3] {whole milk}                                                         
+[4] {pip fruit,yogurt,cream cheese ,meat spreads}                        
+[5] {other vegetables,whole milk,condensed milk,long life bakery product}</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p></br></p>
@@ -252,7 +285,7 @@ sum_sulfate/observered_days</code></pre>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSG9tZXdvcmsgMiAtIFIgRXhlcmNpc2VzIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyBFeGVyY2lzZSAzLgpgYGB7cn0KIyBTY2FuIGFuZCBnZXQgbmFtZSBvZiBhbGwgQ1NWIGZpbGVzCmZuYW1lcyA9IGxpc3QuZmlsZXMocGF0aCA9ICJzcGVjZGF0YS8uIiwgcGF0dGVybiA9ICIqLmNzdiIpCiMgU3VtIG9mIHN1bGZhdGUgdmFsdWVzIGluIGFsbCBDU1YgZmlsZXMKc3VtX3N1bGZhdGUgPSAwCiMgTnVtYmVyIG9mIG1vbml0b3JlZCBkYXlzCm9ic2VydmVyZWRfZGF5cyA9IDAKIyBDYWxjdWxhdGluZyBzdW0gb2Ygc3VsZmF0ZSB2YWx1ZXMgYW5kIG51bWJlciBvZiBvYnNlcnZlcmVkIGRheXMKZm9yIChpIGluIDE6bGVuZ3RoKGZuYW1lcykpIHsKICAjIFJlYWQgaS10aCBDU1YgZmlsZSBpbnRvIFIKICBhc3NpZ24oZm5hbWVzW2ldLCByZWFkLmNzdihwYXN0ZSgic3BlY2RhdGEvIiwgZm5hbWVzW2ldLCBzZXAgPSAiIikpKQogICMgR2V0IHN1bGZhdGUgdmFsdWVzIGluIGktdGggQ1NWIGZpbGUKICBzdWxmYXRlX3ZhbHVlcyA9IGdldChmbmFtZXNbaV0pJHN1bGZhdGUKICAjIFN1bW1pbmcgYXZhaWxhYmxlIHZhbHVlcyBvZiBzdWxmYXRlCiAgc3VtX3N1bGZhdGUgPSBzdW1fc3VsZmF0ZSArIHN1bShzdWxmYXRlX3ZhbHVlcywgbmEucm0gPSBUKQogICMgQ2FsY3VsYXRlIG51bWJlciBvZiBvYnNlcnZlcmVkIGRheXMKICBmb3IgKGogaW4gMTpsZW5ndGgoc3VsZmF0ZV92YWx1ZXMpKSB7CiAgICBpZiAoIWlzLm5hKHN1bGZhdGVfdmFsdWVzW2pdKSkKICAgICAgb2JzZXJ2ZXJlZF9kYXlzID0gb2JzZXJ2ZXJlZF9kYXlzICsgMQogIH0KfQoKIyBNZWFuIG9mIHN1bGZhdGUgYWNyb3NzIGFsbCBsb2NhdGlvbnMgZm9yIGFsbCBkYXlzCnN1bV9zdWxmYXRlL29ic2VydmVyZWRfZGF5cwpgYGAKCiMjIEV4ZXJjaXNlIDQuCgojIyMjIDQuMQpgYGB7cn0KCmBgYAo8L2JyPgoKIyMjIyA0LjIKYGBge3J9CgpgYGAKPC9icj4KCiMjIyMgNC4zCmBgYHtyfQoKYGBgCjwvYnI+CgojIyMjIDQuNApgYGB7cn0KCmBgYAo8L2JyPgoKIyMjIyA0LjUKYGBge3J9CgpgYGAKPC9icj4K</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSG9tZXdvcmsgMiAtIFIgRXhlcmNpc2VzIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyBFeGVyY2lzZSAzLiBNZWFuIG9mIHN1bGZhdGUgdmFsdWVzIGluIHBvbGx1dGlvbiBtb25pdG9yaW5nIGRhdGEKYGBge3J9CiMgU2NhbiBhbmQgZ2V0IG5hbWUgb2YgYWxsIENTViBmaWxlcwpmbmFtZXMgPSBsaXN0LmZpbGVzKHBhdGggPSAic3BlY2RhdGEvLiIsIHBhdHRlcm4gPSAiKi5jc3YiKQojIFN1bSBvZiBzdWxmYXRlIHZhbHVlcyBpbiBhbGwgQ1NWIGZpbGVzCnN1bV9zdWxmYXRlID0gMAojIE51bWJlciBvZiBtb25pdG9yZWQgZGF5cwpvYnNlcnZlcmVkX2RheXMgPSAwCiMgQ2FsY3VsYXRpbmcgc3VtIG9mIHN1bGZhdGUgdmFsdWVzIGFuZCBudW1iZXIgb2Ygb2JzZXJ2ZXJlZCBkYXlzCmZvciAoaSBpbiAxOmxlbmd0aChmbmFtZXMpKSB7CiAgIyBSZWFkIGktdGggQ1NWIGZpbGUgaW50byBSCiAgYXNzaWduKGZuYW1lc1tpXSwgcmVhZC5jc3YocGFzdGUoInNwZWNkYXRhLyIsIGZuYW1lc1tpXSwgc2VwID0gIiIpKSkKICAjIEdldCBzdWxmYXRlIHZhbHVlcyBpbiBpLXRoIENTViBmaWxlCiAgc3VsZmF0ZV92YWx1ZXMgPSBnZXQoZm5hbWVzW2ldKSRzdWxmYXRlCiAgIyBTdW1taW5nIGF2YWlsYWJsZSB2YWx1ZXMgb2Ygc3VsZmF0ZQogIHN1bV9zdWxmYXRlID0gc3VtX3N1bGZhdGUgKyBzdW0oc3VsZmF0ZV92YWx1ZXMsIG5hLnJtID0gVCkKICAjIENhbGN1bGF0ZSBudW1iZXIgb2Ygb2JzZXJ2ZXJlZCBkYXlzCiAgZm9yIChqIGluIDE6bGVuZ3RoKHN1bGZhdGVfdmFsdWVzKSkgewogICAgaWYgKCFpcy5uYShzdWxmYXRlX3ZhbHVlc1tqXSkpCiAgICAgIG9ic2VydmVyZWRfZGF5cyA9IG9ic2VydmVyZWRfZGF5cyArIDEKICB9Cn0KCiMgTWVhbiBvZiBzdWxmYXRlIGFjcm9zcyBhbGwgbG9jYXRpb25zIGZvciBhbGwgZGF5cwpzcHJpbnRmKCJNZWFuIHZhbHVlIG9mIHN1bGZhdGUgaXMgJWYiLCBzdW1fc3VsZmF0ZS9vYnNlcnZlcmVkX2RheXMpCmBgYAoKIyMgRXhlcmNpc2UgNC4gR3JvY2VyaWVzIGRhdGEgc2V0IHdpdGggYXJ1bGVzIHBhY2thZ2UKCiMjIyMgNC4xCmBgYHtyfQojIExvYWQgYXJ1bGVzIHBhY2thZ2UKbGlicmFyeSgiYXJ1bGVzIikKIyBMb2FkIGdyb2NlcmllcyBkYXRhIHNldApkYXRhKCJHcm9jZXJpZXMiKQojIChpKSBNb3N0IGZyZXF1ZW50IGl0ZW0gKFdlIGNhbiBhbHNvIGdldCB0aGlzIGZyb20gc3VtbWFyeShHcm9jZXJpZXMpKQpHcm9jVGlkTGlzdHMgPC0gYXMoR3JvY2VyaWVzLCAidGlkTGlzdHMiKQptb3N0RnJlcXVlbnRJdGVtID0gR3JvY1RpZExpc3RzW3doaWNoLm1heChzaXplKEdyb2NUaWRMaXN0cykpXQpwcmludChwYXN0ZSgiTW9zdCBmcmVxdWVudCBpdGVtIGlzIiwgaXRlbUxhYmVscyhtb3N0RnJlcXVlbnRJdGVtKSkpCiMgKGlpKSBMZW5ndGggb2YgbG9uZ2VzdCB0cmFuc2FjdGlvbnMKbGVuZ3RoX2xvbmdlc3QgPSBtYXgoc2l6ZShHcm9jZXJpZXMpKQpzcHJpbnRmKCJMZW5ndGggb2YgbG9uZ2VzdCB0cmFuc2FjdGlvbnMgaXMgJWQiLCBsZW5ndGhfbG9uZ2VzdCkKIyAoaWlpKSBGaXJzdCBmaXZlIHRyYW5zYWN0aW9ucyAodHJhbnNhY3Rpb25JbmZvKCkgZG9lcyBub3QgZ2l2ZSBhbnkgaW5mb3JtYXRpb24pCmluc3BlY3QoR3JvY2VyaWVzWzE6NV0pCmBgYAo8L2JyPgoKIyMjIyA0LjIKYGBge3J9CgpgYGAKPC9icj4KCiMjIyMgNC4zCmBgYHtyfQoKYGBgCjwvYnI+CgojIyMjIDQuNApgYGB7cn0KCmBgYAo8L2JyPgoKIyMjIyA0LjUKYGBge3J9CgpgYGAKPC9icj4K</div>
 
 
 
