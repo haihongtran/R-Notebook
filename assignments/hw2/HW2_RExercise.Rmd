@@ -58,13 +58,19 @@ rules = apriori(Groceries, parameter = list(support = 0.001, confidence = 0.8))
 
 #### 4.3. Draw scatter plot for all association rules
 ```{r}
-
+# Load arulesViz package
+library("arulesViz")
+# Plot rules
+plot(rules)
 ```
 </br>
 
 #### 4.4. Print top-3 association rules according to the lift
 ```{r}
-
+# Get the 3 rules having highest lift values
+top_rules_by_lift = head(sort(rules, by = "lift"), n = 3)
+# Print the rules
+labels(top_rules_by_lift)
 ```
 </br>
 
@@ -72,4 +78,3 @@ rules = apriori(Groceries, parameter = list(support = 0.001, confidence = 0.8))
 ```{r}
 
 ```
-</br>
