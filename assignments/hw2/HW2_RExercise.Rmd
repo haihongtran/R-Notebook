@@ -76,5 +76,5 @@ labels(top_rules_by_lift)
 
 #### 4.5. Draw top-3 association rules as a graph such that a node becomes an item
 ```{r}
-
+plot(top_rules_by_lift, method="graph", shading = "lift")
 ```
