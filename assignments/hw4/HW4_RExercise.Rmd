@@ -1,0 +1,62 @@
+---
+title: "KSE525 HW4 - R Exercise"
+output: html_notebook
+---
+
+## Exercise 5. k-means algorithm
+
+```{r}
+# Load data
+data(wine, package = "rattle.data")
+```
+
+```{r}
+# center and scale wine dataset without labels
+df <- scale(wine[-1])
+```
+
+```{r}
+# wssplot function
+wssplot <- function(data, nc=15, seed=1234){
+    wss <- (nrow(data)-1)*sum(apply(data,2,var))
+    for (i in 2:nc) {
+        set.seed(seed)
+        wss[i] <- sum(kmeans(data, centers=i)$withinss)
+    }
+    plot(1:nc, wss, type="b", xlab="Number of Clusters",
+         ylab="Within groups sum of squares")
+}
+```
+</br>
+
+### 1). wssplot function
+```{r}
+wssplot(df)
+```
+
+#### The wssplot function draws a graph with **x axis** as number of clusters, and **y axis** as the within-group sum of squares corresponding to the number of clusters.
+#### Looking at the graph above, starting from cluster number of 3, the value of within-group sum of squares starts not to decrease rapidly. Therefore, the good number of clusters (k) is 3.
+</br>
+
+### 2). Perform **k-means** clustering with the value of _k_ obtained in 1).
+```{r}
+# Set seed value
+set.seed(1234)
+kmeans_obj = kmeans(df, 3, nstart=25)
+# Print number of points assigned to each cluster
+print(kmeans_obj$size)
+```
+</br>
+
+### 3). Calculate variable means for each cluster in the original metric
+```{r}
+aggregate(wine[-1], list(kmeans_obj$cluster), mean)
+```
+</br>
+
+### 4). Print out the confusion matrix
+```{r}
+table(kmeans_obj$cluster, wine$Type)
+```
+#### Looking at the confusion matrix above, we see that there are 3 records of Type 3 which are incorrectly assigned to cluster of Type 2.
+
