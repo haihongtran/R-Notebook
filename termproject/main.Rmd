@@ -53,7 +53,6 @@ library(ggrepel) # for ggplot2
 library(randomForest) # random forest
 library(psych) # for psychological
 library(xgboost) # xgboost
-library(Ckmeans.1d.dp) #required for ggplot clustering
 ```
 
 Below, I am reading the csv's as dataframes into R.
@@ -199,12 +198,12 @@ Besides making sure that the NAs are taken care off, I have also converted chara
 The PoolQC is the variable with most NAs. The description is as follows:
 
 PoolQC: Pool quality
-		
-       Ex	Excellent
-       Gd	Good
-       TA	Average/Typical
-       Fa	Fair
-       NA	No Pool
+    
+       Ex Excellent
+       Gd Good
+       TA Average/Typical
+       Fa Fair
+       NA No Pool
        
 So, it is obvious that I need to just assign 'No Pool' to the NAs. Also, the high number of NAs makes sense as normally only a small proportion of houses have a pool.
 
@@ -242,14 +241,14 @@ all$PoolQC[2600] <- 2
 
 **Miscellaneous feature not covered in other categories**
 
-Within Miscellaneous Feature, there are 2814 NAs. As the values are not ordinal, I will convert MiscFeature into a factor. Values:	
+Within Miscellaneous Feature, there are 2814 NAs. As the values are not ordinal, I will convert MiscFeature into a factor. Values:  
 
-       Elev	Elevator
-       Gar2	2nd Garage (if not described in garage section)
-       Othr	Other
-       Shed	Shed (over 100 SF)
-       TenC	Tennis Court
-       NA	None
+       Elev Elevator
+       Gar2 2nd Garage (if not described in garage section)
+       Othr Other
+       Shed Shed (over 100 SF)
+       TenC Tennis Court
+       NA None
 
 ```{r}
 all$MiscFeature[is.na(all$MiscFeature)] <- 'None'
@@ -273,9 +272,9 @@ When looking at the frequencies, the variable seems irrelevant to me. Having a s
 
 Within Alley, there are 2721 NAs. As the values are not ordinal, I will convert Alley into a factor. Values:
 
-       Grvl	Gravel
-       Pave	Paved
-       NA 	No alley access
+       Grvl Gravel
+       Pave Paved
+       NA   No alley access
 
 ```{r}
 all$Alley[is.na(all$Alley)] <- 'None'
@@ -296,11 +295,11 @@ table(all$Alley)
 
 Within Fence, there are 2348 NAs. The values seem to be ordinal. Values:
 
-       GdPrv	Good Privacy
-       MnPrv	Minimum Privacy
-       GdWo	Good Wood
-       MnWw	Minimum Wood/Wire
-       NA	No Fence
+       GdPrv  Good Privacy
+       MnPrv  Minimum Privacy
+       GdWo Good Wood
+       MnWw Minimum Wood/Wire
+       NA No Fence
 
 ```{r}
 all$Fence[is.na(all$Fence)] <- 'None'
@@ -326,12 +325,12 @@ Within Fireplace Quality, there are 1420 NAs. Number of fireplaces is complete.
 
 The number of NAs in FireplaceQu matches the number of houses with 0 fireplaces. This means that I can safely replace the NAs in FireplaceQu with 'no fireplace'. The values are ordinal, and I can use the Qualities vector that I have already created for the Pool Quality. Values:
 
-       Ex	Excellent - Exceptional Masonry Fireplace
-       Gd	Good - Masonry Fireplace in main level
-       TA	Average - Prefabricated Fireplace in main living area or Masonry Fireplace in basement
-       Fa	Fair - Prefabricated Fireplace in basement
-       Po	Poor - Ben Franklin Stove
-       NA	No Fireplace
+       Ex Excellent - Exceptional Masonry Fireplace
+       Gd Good - Masonry Fireplace in main level
+       TA Average - Prefabricated Fireplace in main living area or Masonry Fireplace in basement
+       Fa Fair - Prefabricated Fireplace in basement
+       Po Poor - Ben Franklin Stove
+       NA No Fireplace
 
 ```{r}
 all$FireplaceQu[is.na(all$FireplaceQu)] <- 'None'
@@ -375,10 +374,10 @@ for (i in 1:nrow(all)){
 
 No NAs. Values seem ordinal (Regular=best)
 
-       Reg	Regular	
-       IR1	Slightly irregular
-       IR2	Moderately Irregular
-       IR3	Irregular
+       Reg  Regular 
+       IR1  Slightly irregular
+       IR2  Moderately Irregular
+       IR3  Irregular
 
 ```{r}
 all$LotShape<-as.integer(revalue(all$LotShape, c('IR3'=0, 'IR2'=1, 'IR1'=2, 'Reg'=3)))
@@ -390,11 +389,11 @@ sum(table(all$LotShape))
 
 No NAs. The values seemed possibly ordinal to me, but the visualization does not show this. Therefore, I will convert the variable into a factor.
 
-       Inside	Inside lot
-       Corner	Corner lot
-       CulDSac	Cul-de-sac
-       FR2	Frontage on 2 sides of property
-       FR3	Frontage on 3 sides of property
+       Inside Inside lot
+       Corner Corner lot
+       CulDSac  Cul-de-sac
+       FR2  Frontage on 2 sides of property
+       FR3  Frontage on 3 sides of property
        
 ```{r}
 ggplot(all[!is.na(all$SalePrice),], aes(x=as.factor(LotConfig), y=SalePrice)) +
@@ -465,13 +464,13 @@ Now, the 4 character variables related to garage all have the same set of 158 NA
 
 The values do not seem ordinal, so I will convert into a factor.
 
-       2Types	More than one type of garage
-       Attchd	Attached to home
-       Basment	Basement Garage
-       BuiltIn	Built-In (Garage part of house - typically has room above garage)
-       CarPort	Car Port
-       Detchd	Detached from home
-       NA	No Garage
+       2Types More than one type of garage
+       Attchd Attached to home
+       Basment  Basement Garage
+       BuiltIn  Built-In (Garage part of house - typically has room above garage)
+       CarPort  Car Port
+       Detchd Detached from home
+       NA No Garage
 
 ```{r}
 all$GarageType[is.na(all$GarageType)] <- 'No Garage'
@@ -483,10 +482,10 @@ table(all$GarageType)
 
 The values are ordinal.
 
-       Fin	Finished
-       RFn	Rough Finished	
-       Unf	Unfinished
-       NA	No Garage       
+       Fin  Finished
+       RFn  Rough Finished  
+       Unf  Unfinished
+       NA No Garage       
 
 ```{r}
 all$GarageFinish[is.na(all$GarageFinish)] <- 'None'
@@ -500,12 +499,12 @@ table(all$GarageFinish)
 
 Another variable than can be made ordinal with the Qualities vector.
 
-       Ex	Excellent
-       Gd	Good
-       TA	Typical/Average
-       Fa	Fair
-       Po	Poor
-       NA	No Garage
+       Ex Excellent
+       Gd Good
+       TA Typical/Average
+       Fa Fair
+       Po Poor
+       NA No Garage
        
 ```{r}
 all$GarageQual[is.na(all$GarageQual)] <- 'None'
@@ -516,12 +515,12 @@ table(all$GarageQual)
 **GarageCond: Garage condition**
 
 Another variable than can be made ordinal with the Qualities vector.
-       Ex	Excellent
-       Gd	Good
-       TA	Typical/Average
-       Fa	Fair
-       Po	Poor
-       NA	No Garage
+       Ex Excellent
+       Gd Good
+       TA Typical/Average
+       Fa Fair
+       Po Poor
+       NA No Garage
 
 ```{r}
 all$GarageCond[is.na(all$GarageCond)] <- 'None'
@@ -561,45 +560,45 @@ Now that the 5 variables considered agree upon 79 houses with 'no basement', I a
 
 A variable than can be made ordinal with the Qualities vector.
 
-       Ex	Excellent (100+ inches)	
-       Gd	Good (90-99 inches)
-       TA	Typical (80-89 inches)
-       Fa	Fair (70-79 inches)
-       Po	Poor (<70 inches
-       NA	No Basement
+       Ex Excellent (100+ inches) 
+       Gd Good (90-99 inches)
+       TA Typical (80-89 inches)
+       Fa Fair (70-79 inches)
+       Po Poor (<70 inches
+       NA No Basement
 
 ```{r, message=FALSE}
 all$BsmtQual[is.na(all$BsmtQual)] <- 'None'
 all$BsmtQual<-as.integer(revalue(all$BsmtQual, Qualities))
 table(all$BsmtQual)
 ```
-		
+    
 **BsmtCond: Evaluates the general condition of the basement**
 
 A variable than can be made ordinal with the Qualities vector.
 
-       Ex	Excellent
-       Gd	Good
-       TA	Typical - slight dampness allowed
-       Fa	Fair - dampness or some cracking or settling
-       Po	Poor - Severe cracking, settling, or wetness
-       NA	No Basement
+       Ex Excellent
+       Gd Good
+       TA Typical - slight dampness allowed
+       Fa Fair - dampness or some cracking or settling
+       Po Poor - Severe cracking, settling, or wetness
+       NA No Basement
 
 ```{r, message=FALSE}
 all$BsmtCond[is.na(all$BsmtCond)] <- 'None'
 all$BsmtCond<-as.integer(revalue(all$BsmtCond, Qualities))
 table(all$BsmtCond)
 ```
-	
+  
 **BsmtExposure: Refers to walkout or garden level walls**
 
 A variable than can be made ordinal.
 
-       Gd	Good Exposure
-       Av	Average Exposure (split levels or foyers typically score average or above)	
-       Mn	Mimimum Exposure
-       No	No Exposure
-       NA	No Basement
+       Gd Good Exposure
+       Av Average Exposure (split levels or foyers typically score average or above)  
+       Mn Mimimum Exposure
+       No No Exposure
+       NA No Basement
 
 ```{r}
 all$BsmtExposure[is.na(all$BsmtExposure)] <- 'None'
@@ -613,14 +612,14 @@ table(all$BsmtExposure)
 
 A variable than can be made ordinal.
 
-       GLQ	Good Living Quarters
-       ALQ	Average Living Quarters
-       BLQ	Below Average Living Quarters	
-       Rec	Average Rec Room
-       LwQ	Low Quality
-       Unf	Unfinshed
-       NA	No Basement
-		
+       GLQ  Good Living Quarters
+       ALQ  Average Living Quarters
+       BLQ  Below Average Living Quarters 
+       Rec  Average Rec Room
+       LwQ  Low Quality
+       Unf  Unfinshed
+       NA No Basement
+    
 ```{r}
 all$BsmtFinType1[is.na(all$BsmtFinType1)] <- 'None'
 FinType <- c('None'=0, 'Unf'=1, 'LwQ'=2, 'Rec'=3, 'BLQ'=4, 'ALQ'=5, 'GLQ'=6)
@@ -633,13 +632,13 @@ table(all$BsmtFinType1)
 
 A variable than can be made ordinal with the FinType vector.
 
-       GLQ	Good Living Quarters
-       ALQ	Average Living Quarters
-       BLQ	Below Average Living Quarters	
-       Rec	Average Rec Room
-       LwQ	Low Quality
-       Unf	Unfinshed
-       NA	No Basement
+       GLQ  Good Living Quarters
+       ALQ  Average Living Quarters
+       BLQ  Below Average Living Quarters 
+       Rec  Average Rec Room
+       LwQ  Low Quality
+       Unf  Unfinshed
+       NA No Basement
 
 ```{r}
 all$BsmtFinType2[is.na(all$BsmtFinType2)] <- 'None'
@@ -732,11 +731,11 @@ This leaves me with 23 houses that really have no masonry.
 
 Will check the ordinality below.
 
-       BrkCmn	Brick Common
-       BrkFace	Brick Face
-       CBlock	Cinder Block
-       None	None
-       Stone	Stone
+       BrkCmn Brick Common
+       BrkFace  Brick Face
+       CBlock Cinder Block
+       None None
+       Stone  Stone
 
 ```{r}
 all$MasVnrType[is.na(all$MasVnrType)] <- 'None'
@@ -767,14 +766,14 @@ all$MasVnrArea[is.na(all$MasVnrArea)] <-0
 
 4 NAs. Values are categorical.
 
-       A	Agriculture
-       C	Commercial
-       FV	Floating Village Residential
-       I	Industrial
-       RH	Residential High Density
-       RL	Residential Low Density
-       RP	Residential Low Density Park 
-       RM	Residential Medium Density
+       A  Agriculture
+       C  Commercial
+       FV Floating Village Residential
+       I  Industrial
+       RH Residential High Density
+       RL Residential Low Density
+       RP Residential Low Density Park 
+       RM Residential Medium Density
 
 ```{r}
 #imputing the mode
@@ -796,11 +795,11 @@ Kitchen quality has 1 NA. Number of Kitchens is complete.
 
 1NA. Can be made ordinal with the qualities vector.
 
-       Ex	Excellent
-       Gd	Good
-       TA	Typical/Average
-       Fa	Fair
-       Po	Poor
+       Ex Excellent
+       Gd Good
+       TA Typical/Average
+       Fa Fair
+       Po Poor
  
 ```{r, message=FALSE}
 all$KitchenQual[is.na(all$KitchenQual)] <- 'TA' #replace with most common value
@@ -825,10 +824,10 @@ sum(table(all$KitchenAbvGr))
 
 2 NAs. Ordinal as additional utilities is better.
 
-       AllPub	All public Utilities (E,G,W,& S)	
-       NoSewr	Electricity, Gas, and Water (Septic Tank)
-       NoSeWa	Electricity and Gas Only
-       ELO	Electricity only
+       AllPub All public Utilities (E,G,W,& S)  
+       NoSewr Electricity, Gas, and Water (Septic Tank)
+       NoSeWa Electricity and Gas Only
+       ELO  Electricity only
 
 However, the table below shows that only one house does not have all public utilities. This house is in the train set. Therefore, imputing 'AllPub' for the NAs means that all houses in the test set will have 'AllPub'. This makes the variable useless for prediction. Consequently, I will get rid of it.
 
@@ -846,14 +845,14 @@ all$Utilities <- NULL
 
 1NA. Can be made ordinal (salvage only is worst, typical is best).
 
-       Typ	Typical Functionality
-       Min1	Minor Deductions 1
-       Min2	Minor Deductions 2
-       Mod	Moderate Deductions
-       Maj1	Major Deductions 1
-       Maj2	Major Deductions 2
-       Sev	Severely Damaged
-       Sal	Salvage only
+       Typ  Typical Functionality
+       Min1 Minor Deductions 1
+       Min2 Minor Deductions 2
+       Mod  Moderate Deductions
+       Maj1 Major Deductions 1
+       Maj2 Major Deductions 2
+       Sev  Severely Damaged
+       Sal  Salvage only
 
 
 ```{r, message=FALSE}
@@ -877,23 +876,23 @@ sum(table(all$Functional))
 
 1 NA. Values are categorical.
 
-       AsbShng	Asbestos Shingles
-       AsphShn	Asphalt Shingles
-       BrkComm	Brick Common
-       BrkFace	Brick Face
-       CBlock	Cinder Block
-       CemntBd	Cement Board
-       HdBoard	Hard Board
-       ImStucc	Imitation Stucco
-       MetalSd	Metal Siding
-       Other	Other
-       Plywood	Plywood
-       PreCast	PreCast	
-       Stone	Stone
-       Stucco	Stucco
-       VinylSd	Vinyl Siding
-       Wd Sdng	Wood Siding
-       WdShing	Wood Shingles
+       AsbShng  Asbestos Shingles
+       AsphShn  Asphalt Shingles
+       BrkComm  Brick Common
+       BrkFace  Brick Face
+       CBlock Cinder Block
+       CemntBd  Cement Board
+       HdBoard  Hard Board
+       ImStucc  Imitation Stucco
+       MetalSd  Metal Siding
+       Other  Other
+       Plywood  Plywood
+       PreCast  PreCast 
+       Stone  Stone
+       Stucco Stucco
+       VinylSd  Vinyl Siding
+       Wd Sdng  Wood Siding
+       WdShing  Wood Shingles
 
 ```{r}
 #imputing mode
@@ -908,23 +907,23 @@ sum(table(all$Exterior1st))
 
 1 NA. Values are categorical.
 
-       AsbShng	Asbestos Shingles
-       AsphShn	Asphalt Shingles
-       BrkComm	Brick Common
-       BrkFace	Brick Face
-       CBlock	Cinder Block
-       CemntBd	Cement Board
-       HdBoard	Hard Board
-       ImStucc	Imitation Stucco
-       MetalSd	Metal Siding
-       Other	Other
-       Plywood	Plywood
-       PreCast	PreCast
-       Stone	Stone
-       Stucco	Stucco
-       VinylSd	Vinyl Siding
-       Wd Sdng	Wood Siding
-       WdShing	Wood Shingles
+       AsbShng  Asbestos Shingles
+       AsphShn  Asphalt Shingles
+       BrkComm  Brick Common
+       BrkFace  Brick Face
+       CBlock Cinder Block
+       CemntBd  Cement Board
+       HdBoard  Hard Board
+       ImStucc  Imitation Stucco
+       MetalSd  Metal Siding
+       Other  Other
+       Plywood  Plywood
+       PreCast  PreCast
+       Stone  Stone
+       Stucco Stucco
+       VinylSd  Vinyl Siding
+       Wd Sdng  Wood Siding
+       WdShing  Wood Shingles
 
 ```{r}
 #imputing mode
@@ -939,11 +938,11 @@ sum(table(all$Exterior2nd))
 
 No NAs. Can be made ordinal using the Qualities vector.
 
-       Ex	Excellent
-       Gd	Good
-       TA	Average/Typical
-       Fa	Fair
-       Po	Poor
+       Ex Excellent
+       Gd Good
+       TA Average/Typical
+       Fa Fair
+       Po Poor
        
 ```{r}
 all$ExterQual<-as.integer(revalue(all$ExterQual, Qualities))
@@ -951,16 +950,16 @@ table(all$ExterQual)
 sum(table(all$ExterQual))
 ```
 
-		
+    
 **ExterCond: Evaluates the present condition of the material on the exterior**
 
 No NAs. Can be made ordinal using the Qualities vector.
 
-       Ex	Excellent
-       Gd	Good
-       TA	Average/Typical
-       Fa	Fair
-       Po	Poor
+       Ex Excellent
+       Gd Good
+       TA Average/Typical
+       Fa Fair
+       Po Poor
 
 ```{r}
 all$ExterCond<-as.integer(revalue(all$ExterCond, Qualities))
@@ -976,11 +975,11 @@ sum(table(all$ExterCond))
 
 1 NA. Values are categorical.
 
-       SBrkr	Standard Circuit Breakers & Romex
-       FuseA	Fuse Box over 60 AMP and all Romex wiring (Average)	
-       FuseF	60 AMP Fuse Box and mostly Romex wiring (Fair)
-       FuseP	60 AMP Fuse Box and mostly knob & tube wiring (poor)
-       Mix	Mixed
+       SBrkr  Standard Circuit Breakers & Romex
+       FuseA  Fuse Box over 60 AMP and all Romex wiring (Average) 
+       FuseF  60 AMP Fuse Box and mostly Romex wiring (Fair)
+       FuseP  60 AMP Fuse Box and mostly knob & tube wiring (poor)
+       Mix  Mixed
 
 ```{r}
 #imputing mode
@@ -999,16 +998,16 @@ sum(table(all$Electrical))
 
 1 NA. Values are categorical.
 
-       WD 	Warranty Deed - Conventional
-       CWD	Warranty Deed - Cash
-       VWD	Warranty Deed - VA Loan
-       New	Home just constructed and sold
-       COD	Court Officer Deed/Estate
-       Con	Contract 15% Down payment regular terms
-       ConLw	Contract Low Down payment and low interest
-       ConLI	Contract Low Interest
-       ConLD	Contract Low Down
-       Oth	Other
+       WD   Warranty Deed - Conventional
+       CWD  Warranty Deed - Cash
+       VWD  Warranty Deed - VA Loan
+       New  Home just constructed and sold
+       COD  Court Officer Deed/Estate
+       Con  Contract 15% Down payment regular terms
+       ConLw  Contract Low Down payment and low interest
+       ConLI  Contract Low Interest
+       ConLD  Contract Low Down
+       Oth  Other
 
 ```{r}
 #imputing mode
@@ -1023,12 +1022,12 @@ sum(table(all$SaleType))
 
 No NAs. Values are categorical.
 
-       Normal	Normal Sale
-       Abnorml	Abnormal Sale -  trade, foreclosure, short sale
-       AdjLand	Adjoining Land Purchase
-       Alloca	Allocation - two linked properties with separate deeds, typically condo with a garage unit	
-       Family	Sale between family members
-       Partial	Home was not completed when last assessed (associated with New Homes)
+       Normal Normal Sale
+       Abnorml  Abnormal Sale -  trade, foreclosure, short sale
+       AdjLand  Adjoining Land Purchase
+       Alloca Allocation - two linked properties with separate deeds, typically condo with a garage unit  
+       Family Sale between family members
+       Partial  Home was not completed when last assessed (associated with New Homes)
 
 ```{r}
 all$SaleCondition <- as.factor(all$SaleCondition)
@@ -1053,11 +1052,11 @@ cat('There are', length(Charcol), 'remaining columns with character values')
 **Foundation: Type of foundation**
 
         BrkTil          Brick & Tile
-        CBlock	        Cinder Block
-        PConc	        Poured Contrete	
-        Slab	        Slab
-        Stone	        Stone
-        Wood	        Wood
+        CBlock          Cinder Block
+        PConc         Poured Contrete 
+        Slab          Slab
+        Stone         Stone
+        Wood          Wood
 
 ```{r}
 #No ordinality, so converting into factors
@@ -1073,13 +1072,13 @@ sum(table(all$Foundation))
 There are 2 heating variables, and one that indicates Airco Yes/No.
 
 **Heating: Type of heating**
-		
-       Floor	Floor Furnace
-       GasA	Gas forced warm air furnace
-       GasW	Gas hot water or steam heat
-       Grav	Gravity furnace	
-       OthW	Hot water or steam heat other than gas
-       Wall	Wall furnace
+    
+       Floor  Floor Furnace
+       GasA Gas forced warm air furnace
+       GasW Gas hot water or steam heat
+       Grav Gravity furnace 
+       OthW Hot water or steam heat other than gas
+       Wall Wall furnace
        
 ```{r}
 #No ordinality, so converting into factors
@@ -1090,11 +1089,11 @@ sum(table(all$Heating))
 
 **HeatingQC: Heating quality and condition**
 
-       Ex	Excellent
-       Gd	Good
-       TA	Average/Typical
-       Fa	Fair
-       Po	Poor
+       Ex Excellent
+       Gd Good
+       TA Average/Typical
+       Fa Fair
+       Po Poor
        
 ```{r}
 #making the variable ordinal using the Qualities vector
@@ -1105,8 +1104,8 @@ sum(table(all$HeatingQC))
 
 **CentralAir: Central air conditioning**
 
-       N	No
-       Y	Yes
+       N  No
+       Y  Yes
 
 ```{r}
 all$CentralAir<-as.integer(revalue(all$CentralAir, c('N'=0, 'Y'=1)))
@@ -1122,12 +1121,12 @@ There are 2 variables that deal with the roof of houses.
 
 **RoofStyle: Type of roof**
 
-       Flat	Flat
-       Gable	Gable
-       Gambrel	Gabrel (Barn)
-       Hip	Hip
-       Mansard	Mansard
-       Shed	Shed
+       Flat Flat
+       Gable  Gable
+       Gambrel  Gabrel (Barn)
+       Hip  Hip
+       Mansard  Mansard
+       Shed Shed
 
 ```{r}
 #No ordinality, so converting into factors
@@ -1135,17 +1134,17 @@ all$RoofStyle <- as.factor(all$RoofStyle)
 table(all$RoofStyle)
 sum(table(all$RoofStyle))
 ```
-		
+    
 **RoofMatl: Roof material**
 
-       ClyTile	Clay or Tile
-       CompShg	Standard (Composite) Shingle
-       Membran	Membrane
-       Metal	Metal
-       Roll	Roll
-       Tar&Grv	Gravel & Tar
-       WdShake	Wood Shakes
-       WdShngl	Wood Shingles
+       ClyTile  Clay or Tile
+       CompShg  Standard (Composite) Shingle
+       Membran  Membrane
+       Metal  Metal
+       Roll Roll
+       Tar&Grv  Gravel & Tar
+       WdShake  Wood Shakes
+       WdShngl  Wood Shingles
 
 ```{r}
 #No ordinality, so converting into factors
@@ -1162,10 +1161,10 @@ sum(table(all$RoofMatl))
 
 **LandContour: Flatness of the property**
 
-       Lvl	Near Flat/Level	
-       Bnk	Banked - Quick and significant rise from street grade to building
-       HLS	Hillside - Significant slope from side to side
-       Low	Depression
+       Lvl  Near Flat/Level 
+       Bnk  Banked - Quick and significant rise from street grade to building
+       HLS  Hillside - Significant slope from side to side
+       Low  Depression
 
 ```{r}
 #No ordinality, so converting into factors
@@ -1175,10 +1174,10 @@ sum(table(all$LandContour))
 ```
        
 **LandSlope: Slope of property**
-		
-       Gtl	Gentle slope
-       Mod	Moderate Slope	
-       Sev	Severe Slope
+    
+       Gtl  Gentle slope
+       Mod  Moderate Slope  
+       Sev  Severe Slope
 
 ```{r}
 #Ordinal, so label encoding
@@ -1194,12 +1193,12 @@ sum(table(all$LandSlope))
 2 variables that specify the type and style of dwelling.
 
 **BldgType: Type of dwelling**
-		
-       1Fam	Single-family Detached	
-       2FmCon	Two-family Conversion; originally built as one-family dwelling
-       Duplx	Duplex
-       TwnhsE	Townhouse End Unit
-       TwnhsI	Townhouse Inside Unit
+    
+       1Fam Single-family Detached  
+       2FmCon Two-family Conversion; originally built as one-family dwelling
+       Duplx  Duplex
+       TwnhsE Townhouse End Unit
+       TwnhsI Townhouse Inside Unit
 
 This seems ordinal to me (single family detached=best). Let's check it with visualization.
 
@@ -1218,17 +1217,17 @@ all$BldgType <- as.factor(all$BldgType)
 table(all$BldgType)
 sum(table(all$BldgType))
 ```
-	
+  
 **HouseStyle: Style of dwelling**
-	
-       1Story	One story
-       1.5Fin	One and one-half story: 2nd level finished
-       1.5Unf	One and one-half story: 2nd level unfinished
-       2Story	Two story
-       2.5Fin	Two and one-half story: 2nd level finished
-       2.5Unf	Two and one-half story: 2nd level unfinished
-       SFoyer	Split Foyer
-       SLvl	Split Level
+  
+       1Story One story
+       1.5Fin One and one-half story: 2nd level finished
+       1.5Unf One and one-half story: 2nd level unfinished
+       2Story Two story
+       2.5Fin Two and one-half story: 2nd level finished
+       2.5Unf Two and one-half story: 2nd level unfinished
+       SFoyer Split Foyer
+       SLvl Split Level
 
 ```{r}
 #No ordinality, so converting into factors
@@ -1247,31 +1246,31 @@ sum(table(all$HouseStyle))
 
 Note: as the number of levels is really high, I will look into binning later on.
 
-       Blmngtn	Bloomington Heights
-       Blueste	Bluestem
-       BrDale	Briardale
-       BrkSide	Brookside
-       ClearCr	Clear Creek
-       CollgCr	College Creek
-       Crawfor	Crawford
-       Edwards	Edwards
-       Gilbert	Gilbert
-       IDOTRR	Iowa DOT and Rail Road
-       MeadowV	Meadow Village
-       Mitchel	Mitchell
-       Names	North Ames
-       NoRidge	Northridge
-       NPkVill	Northpark Villa
-       NridgHt	Northridge Heights
-       NWAmes	Northwest Ames
-       OldTown	Old Town
-       SWISU	South & West of Iowa State University
-       Sawyer	Sawyer
-       SawyerW	Sawyer West
-       Somerst	Somerset
-       StoneBr	Stone Brook
-       Timber	Timberland
-       Veenker	Veenker
+       Blmngtn  Bloomington Heights
+       Blueste  Bluestem
+       BrDale Briardale
+       BrkSide  Brookside
+       ClearCr  Clear Creek
+       CollgCr  College Creek
+       Crawfor  Crawford
+       Edwards  Edwards
+       Gilbert  Gilbert
+       IDOTRR Iowa DOT and Rail Road
+       MeadowV  Meadow Village
+       Mitchel  Mitchell
+       Names  North Ames
+       NoRidge  Northridge
+       NPkVill  Northpark Villa
+       NridgHt  Northridge Heights
+       NWAmes Northwest Ames
+       OldTown  Old Town
+       SWISU  South & West of Iowa State University
+       Sawyer Sawyer
+       SawyerW  Sawyer West
+       Somerst  Somerset
+       StoneBr  Stone Brook
+       Timber Timberland
+       Veenker  Veenker
 
 ```{r}
 #No ordinality, so converting into factors
@@ -1281,16 +1280,16 @@ sum(table(all$Neighborhood))
 ```
 
 **Condition1: Proximity to various conditions**
-	
-       Artery	Adjacent to arterial street
-       Feedr	Adjacent to feeder street	
-       Norm	Normal	
-       RRNn	Within 200' of North-South Railroad
-       RRAn	Adjacent to North-South Railroad
-       PosN	Near positive off-site feature--park, greenbelt, etc.
-       PosA	Adjacent to postive off-site feature
-       RRNe	Within 200' of East-West Railroad
-       RRAe	Adjacent to East-West Railroad
+  
+       Artery Adjacent to arterial street
+       Feedr  Adjacent to feeder street 
+       Norm Normal  
+       RRNn Within 200' of North-South Railroad
+       RRAn Adjacent to North-South Railroad
+       PosN Near positive off-site feature--park, greenbelt, etc.
+       PosA Adjacent to postive off-site feature
+       RRNe Within 200' of East-West Railroad
+       RRAe Adjacent to East-West Railroad
 
 ```{r}
 #No ordinality, so converting into factors
@@ -1298,18 +1297,18 @@ all$Condition1 <- as.factor(all$Condition1)
 table(all$Condition1)
 sum(table(all$Condition1))
 ```
-	
+  
 **Condition2: Proximity to various conditions (if more than one is present)**
-		
-       Artery	Adjacent to arterial street
-       Feedr	Adjacent to feeder street	
-       Norm	Normal	
-       RRNn	Within 200' of North-South Railroad
-       RRAn	Adjacent to North-South Railroad
-       PosN	Near positive off-site feature--park, greenbelt, etc.
-       PosA	Adjacent to postive off-site feature
-       RRNe	Within 200' of East-West Railroad
-       RRAe	Adjacent to East-West Railroad
+    
+       Artery Adjacent to arterial street
+       Feedr  Adjacent to feeder street 
+       Norm Normal  
+       RRNn Within 200' of North-South Railroad
+       RRAn Adjacent to North-South Railroad
+       PosN Near positive off-site feature--park, greenbelt, etc.
+       PosA Adjacent to postive off-site feature
+       RRNe Within 200' of East-West Railroad
+       RRAe Adjacent to East-West Railroad
 
 ```{r}
 #No ordinality, so converting into factors
@@ -1326,8 +1325,8 @@ sum(table(all$Condition2))
        
 **Street: Type of road access to property**
 
-       Grvl	Gravel	
-       Pave	Paved
+       Grvl Gravel  
+       Pave Paved
 
 ```{r}
 #Ordinal, so label encoding
@@ -1338,9 +1337,9 @@ sum(table(all$Street))
        
 **PavedDrive: Paved driveway**
 
-       Y	Paved 
-       P	Partial Pavement
-       N	Dirt/Gravel
+       Y  Paved 
+       P  Partial Pavement
+       N  Dirt/Gravel
 
 ```{r}
 #Ordinal, so label encoding
@@ -1389,24 +1388,24 @@ grid.arrange(ys, ms, widths=c(1,2))
 
 ###MSSubClass
 
-MSSubClass: Identifies the type of dwelling involved in the sale.	
+MSSubClass: Identifies the type of dwelling involved in the sale. 
 
-        20	1-STORY 1946 & NEWER ALL STYLES
-        30	1-STORY 1945 & OLDER
-        40	1-STORY W/FINISHED ATTIC ALL AGES
-        45	1-1/2 STORY - UNFINISHED ALL AGES
-        50	1-1/2 STORY FINISHED ALL AGES
-        60	2-STORY 1946 & NEWER
-        70	2-STORY 1945 & OLDER
-        75	2-1/2 STORY ALL AGES
-        80	SPLIT OR MULTI-LEVEL
-        85	SPLIT FOYER
-        90	DUPLEX - ALL STYLES AND AGES
-       120	1-STORY PUD (Planned Unit Development) - 1946 & NEWER
-       150	1-1/2 STORY PUD - ALL AGES
-       160	2-STORY PUD - 1946 & NEWER
-       180	PUD - MULTILEVEL - INCL SPLIT LEV/FOYER
-       190	2 FAMILY CONVERSION - ALL STYLES AND AGES
+        20  1-STORY 1946 & NEWER ALL STYLES
+        30  1-STORY 1945 & OLDER
+        40  1-STORY W/FINISHED ATTIC ALL AGES
+        45  1-1/2 STORY - UNFINISHED ALL AGES
+        50  1-1/2 STORY FINISHED ALL AGES
+        60  2-STORY 1946 & NEWER
+        70  2-STORY 1945 & OLDER
+        75  2-1/2 STORY ALL AGES
+        80  SPLIT OR MULTI-LEVEL
+        85  SPLIT FOYER
+        90  DUPLEX - ALL STYLES AND AGES
+       120  1-STORY PUD (Planned Unit Development) - 1946 & NEWER
+       150  1-1/2 STORY PUD - ALL AGES
+       160  2-STORY PUD - 1946 & NEWER
+       180  PUD - MULTILEVEL - INCL SPLIT LEV/FOYER
+       190  2 FAMILY CONVERSION - ALL STYLES AND AGES
 
 These classes are coded as numbers, but really are categories.
 
@@ -1819,10 +1818,7 @@ all <- all[,!(names(all) %in% dropVars)]
 For the time being, I am keeping it simple and just remove the two really big houses with low SalePrice manually. However, I intend to investigate this more thorough in a later stage (possibly using the 'outliers' package).
 
 ```{r}
-#TODO: keep this?
-outlierIdx = which(all['GrLivArea']>4000 & all['SalePrice']<300000)
-outlierIdx = c(outlierIdx, which(all['OverallQual']<5 & all[,'SalePrice']>200000))
-all <- all[-outlierIdx,]
+all <- all[-c(524, 1299),]
 ```
 
 ##PreProcessing predictor variables
@@ -1958,7 +1954,7 @@ lasso_mod$bestTune
 min(lasso_mod$results$RMSE)
 ```
 
-The documentation of the caret 'varImp' function says: for glmboost and glmnet the absolute value of the coefficients corresponding to the tuned model are used.
+The documentation of the caret `varImp' function says: for glmboost and glmnet the absolute value of the coefficients corresponding to the tuned model are used.
 
 Although this means that a real ranking of the most important variables is not stored, it gives me the opportunity to find out how many of the variables are not used in the model (and hence have coefficient 0).
 
@@ -2024,14 +2020,13 @@ dtest <- xgb.DMatrix(data = as.matrix(test1))
 In addition, I am taking over the best tuned values from the caret cross validation.
 
 ```{r}
-#TODO: fix parameters
 default_param<-list(
         objective = "reg:linear",
         booster = "gbtree",
         eta=0.05, #default = 0.3
         gamma=0,
-        max_depth=2, #default=6, original=3
-        min_child_weight=3, #default=1, original=4
+        max_depth=3, #default=6
+        min_child_weight=4, #default=1
         subsample=1,
         colsample_bytree=1
 )
@@ -2040,15 +2035,14 @@ default_param<-list(
 The next step is to do cross validation to determine the best number of rounds (for the given set of parameters). 
 
 ```{r}
-xgbcv <- xgb.cv( params = default_param, data = dtrain, nrounds = 1000, nfold = 5, showsd = T, stratified = T, print_every_n = 40, early_stopping_rounds = 10, maximize = F)
-xgbcv
+xgbcv <- xgb.cv( params = default_param, data = dtrain, nrounds = 500, nfold = 5, showsd = T, stratified = T, print_every_n = 40, early_stopping_rounds = 10, maximize = F)
 ```
 
 Although it was a bit of work, the hyperparameter tuning definitly paid of, as the cross validated RMSE inproved considerably (from 0.1225 without the caret tuning, to 0.1162 in this version)!
 
 ```{r}
 #train the model using the best iteration found by cross validation
-xgb_mod <- xgb.train(data = dtrain, params=default_param, nrounds = 510)  # TODO: fix optimized nrounds
+xgb_mod <- xgb.train(data = dtrain, params=default_param, nrounds = 454)
 ```
 
 ```{r}
@@ -2059,6 +2053,7 @@ head(predictions_XGB)
 
 ```{r, out.width="100%"}
 #view variable importance plot
+library(Ckmeans.1d.dp) #required for ggplot clustering
 mat <- xgb.importance (feature_names = colnames(train1),model = xgb_mod)
 xgb.ggplot.importance(importance_matrix = mat[1:20], rel_to_first = TRUE)
 ```
