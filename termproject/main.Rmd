@@ -53,6 +53,7 @@ library(ggrepel) # for ggplot2
 library(randomForest) # random forest
 library(psych) # for psychological
 library(xgboost) # xgboost
+library(Ckmeans.1d.dp) #required for ggplot clustering
 ```
 
 Below, I am reading the csv's as dataframes into R.
@@ -2023,6 +2024,7 @@ dtest <- xgb.DMatrix(data = as.matrix(test1))
 In addition, I am taking over the best tuned values from the caret cross validation.
 
 ```{r}
+#TODO: fix parameters
 default_param<-list(
         objective = "reg:linear",
         booster = "gbtree",
@@ -2038,14 +2040,15 @@ default_param<-list(
 The next step is to do cross validation to determine the best number of rounds (for the given set of parameters). 
 
 ```{r}
-xgbcv <- xgb.cv( params = default_param, data = dtrain, nrounds = 500, nfold = 5, showsd = T, stratified = T, print_every_n = 40, early_stopping_rounds = 10, maximize = F)
+xgbcv <- xgb.cv( params = default_param, data = dtrain, nrounds = 1000, nfold = 5, showsd = T, stratified = T, print_every_n = 40, early_stopping_rounds = 10, maximize = F)
+xgbcv
 ```
 
 Although it was a bit of work, the hyperparameter tuning definitly paid of, as the cross validated RMSE inproved considerably (from 0.1225 without the caret tuning, to 0.1162 in this version)!
 
 ```{r}
 #train the model using the best iteration found by cross validation
-xgb_mod <- xgb.train(data = dtrain, params=default_param, nrounds = 454)
+xgb_mod <- xgb.train(data = dtrain, params=default_param, nrounds = 510)  # TODO: fix optimized nrounds
 ```
 
 ```{r}
@@ -2056,7 +2059,6 @@ head(predictions_XGB)
 
 ```{r, out.width="100%"}
 #view variable importance plot
-library(Ckmeans.1d.dp) #required for ggplot clustering
 mat <- xgb.importance (feature_names = colnames(train1),model = xgb_mod)
 xgb.ggplot.importance(importance_matrix = mat[1:20], rel_to_first = TRUE)
 ```
