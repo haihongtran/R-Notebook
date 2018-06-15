@@ -1819,7 +1819,9 @@ all <- all[,!(names(all) %in% dropVars)]
 For the time being, I am keeping it simple and just remove the two really big houses with low SalePrice manually. However, I intend to investigate this more thorough in a later stage (possibly using the 'outliers' package).
 
 ```{r}
-all <- all[-c(524, 1299),]
+outlierIdx = which(all['GrLivArea']>4000 & all['SalePrice']<300000)
+outlierIdx = c(outlierIdx, which(all['OverallQual']<5 & all[,'SalePrice']>200000))
+all <- all[-outlierIdx,]
 ```
 
 ##PreProcessing predictor variables
