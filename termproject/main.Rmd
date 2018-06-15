@@ -53,6 +53,7 @@ library(ggrepel) # for ggplot2
 library(randomForest) # random forest
 library(psych) # for psychological
 library(xgboost) # xgboost
+library(caretEnsemble) # ensemble modelling
 ```
 
 Below, I am reading the csv's as dataframes into R.
@@ -1936,134 +1937,52 @@ test1 <- combined[is.na(all$SalePrice),]
 
 #Modeling
 
-##Lasso regression model
-
-I have also tried Ridge and Elastic Net models, but since lasso gives the best results of those 3 models I am only keeping the lasso model in the document.
-
-The elastic-net penalty is controlled by alpha, and bridges the gap between lasso (alpha=1) and ridge (alpha=0). The tuning parameter lambda controls the overall strength of the penalty. It is known that the ridge penalty shrinks the coefficients of correlated predictors towards each other while the lasso tends to pick one of them and discard the others.
-
-Below, I am using caret cross validation to find the best value for lambda, which is the only hyperparameter that needs to be tuned for the lasso model.
-
+##Training
 ```{r}
+trControl <- trainControl(
+        method="cv",
+        number=7,
+        savePredictions="final",
+        index=createResample(train1$OverallQual, 7),
+        allowParallel =TRUE
+)
+
+xgbTreeGrid <- expand.grid(nrounds = 400, max_depth = seq(2,6,by = 1), eta = 0.1, gamma = 0, colsample_bytree = 1.0,  subsample = 1.0, min_child_weight = 4)
+glmnetGridElastic <- expand.grid(.alpha = 0.3, .lambda = 0.009)
+glmnetGridLasso <- expand.grid(.alpha = 1, .lambda = seq(0.001,0.1,by = 0.001))
+glmnetGridRidge <- expand.grid(.alpha = 0, .lambda = seq(0.001,0.1,by = 0.001))
 set.seed(27042018)
-my_control <-trainControl(method="cv", number=5)
-lassoGrid <- expand.grid(alpha = 1, lambda = seq(0.001,0.1,by = 0.0005))
-
-lasso_mod <- train(x=train1, y=all$SalePrice[!is.na(all$SalePrice)], method='glmnet', trControl= my_control, tuneGrid=lassoGrid) 
-lasso_mod$bestTune
-min(lasso_mod$results$RMSE)
-```
-
-The documentation of the caret `varImp' function says: for glmboost and glmnet the absolute value of the coefficients corresponding to the tuned model are used.
-
-Although this means that a real ranking of the most important variables is not stored, it gives me the opportunity to find out how many of the variables are not used in the model (and hence have coefficient 0).
-
-```{r}
-lassoVarImp <- varImp(lasso_mod,scale=F)
-lassoImportance <- lassoVarImp$importance
-
-varsSelected <- length(which(lassoImportance$Overall!=0))
-varsNotSelected <- length(which(lassoImportance$Overall==0))
-
-cat('Lasso uses', varsSelected, 'variables in its model, and did not select', varsNotSelected, 'variables.')
-```
-
-So lasso did what it is supposed to do: it seems to have dealt with multicolinearity well by not using about 45% of the available variables in the model.
-
-```{r}
-LassoPred <- predict(lasso_mod, test1)
-predictions_lasso <- exp(LassoPred) #need to reverse the log to the real values
-head(predictions_lasso)
-```
-
-##XGBoost model
-
-Initially, I just worked with the XGBoost package directly. The main reason for this was that the package uses its own efficient datastructure (xgb.DMatrix). The package also provides a cross validation function. However, this CV function only determines the optimal number of rounds, and does not support a full grid search of hyperparameters.
-
-Although caret does not seem to use the (fast) datastructure of the xgb package, I eventually decided to do hyperparameter tuning with it anyway, as it at least supports a full grid search. As far as I understand it, the main parameters to tune to avoid overfitting are max_depth, and min_child_weight (see [XGBoost documentation](http://xgboost.readthedocs.io/en/latest/how_to/param_tuning.html)). Below I am setting up a grid that tunes both these parameters, and also the eta (learning rate).
-
-```{r}
-xgb_grid = expand.grid(
-nrounds = 1000,
-eta = c(0.1, 0.05, 0.01),
-max_depth = c(2, 3, 4, 5, 6),
-gamma = 0,
-colsample_bytree=1,
-min_child_weight=c(1, 2, 3, 4 ,5),
-subsample=1
+modelList <<- caretList(
+                  x=train1,
+                  y=all$SalePrice[!is.na(all$SalePrice)],
+                  trControl=trControl,
+                  metric="RMSE",
+                  tuneList=list(
+                          xgbTree = caretModelSpec(method="xgbTree",  tuneGrid = xgbTreeGrid, nthread = 8),
+                          glmnet=caretModelSpec(method="glmnet", tuneGrid = glmnetGridElastic), ## Elastic, highly correlated with lasso and ridge regressions
+                          glmnet=caretModelSpec(method="glmnet", tuneGrid = glmnetGridLasso), ## Lasso
+                          glmnet=caretModelSpec(method="glmnet", tuneGrid = glmnetGridRidge) ## Ridge
+                          )
 )
 ```
 
-The next step is to let caret find the best hyperparameter values (using 5 fold cross validation).
-
+##Weighted Ensemble
 ```{r}
-#xgb_caret <- train(x=train1, y=all$SalePrice[!is.na(all$SalePrice)], method='xgbTree', trControl= my_control, tuneGrid=xgb_grid) 
-#xgb_caret$bestTune
-```
+greedyEnsemble <- caretEnsemble(
+  modelList, 
+  metric="RMSE",
+  trControl=trainControl(
+    number=7, method = "cv"
+  ))
 
-As expected, this took quite a bit of time (locally). As I want to limit the running time on Kaggle, I disabled the code, and am just continuing with the results. According to caret, the 'bestTune' parameters are:
+summary(greedyEnsemble)
 
-* Max_depth=3
-* eta=0.05
-* Min_child_weight=4
-
-In the remainder of this section, I will continue to work with the xgboost package directly. Below, I am starting with the preparation of the data in the recommended format.
-
-```{r}
-label_train <- all$SalePrice[!is.na(all$SalePrice)]
-
-# put our testing & training data into two seperates Dmatrixs objects
-dtrain <- xgb.DMatrix(data = as.matrix(train1), label= label_train)
-dtest <- xgb.DMatrix(data = as.matrix(test1))
-```
-
-In addition, I am taking over the best tuned values from the caret cross validation.
-
-```{r}
-default_param<-list(
-        objective = "reg:linear",
-        booster = "gbtree",
-        eta=0.05, #default = 0.3
-        gamma=0,
-        max_depth=3, #default=6
-        min_child_weight=4, #default=1
-        subsample=1,
-        colsample_bytree=1
-)
-```
-
-The next step is to do cross validation to determine the best number of rounds (for the given set of parameters). 
-
-```{r}
-xgbcv <- xgb.cv( params = default_param, data = dtrain, nrounds = 500, nfold = 5, showsd = T, stratified = T, print_every_n = 40, early_stopping_rounds = 10, maximize = F)
-```
-
-Although it was a bit of work, the hyperparameter tuning definitly paid of, as the cross validated RMSE inproved considerably (from 0.1225 without the caret tuning, to 0.1162 in this version)!
-
-```{r}
-#train the model using the best iteration found by cross validation
-xgb_mod <- xgb.train(data = dtrain, params=default_param, nrounds = 454)
+finalPredictions <- exp(predict(greedyEnsemble, newdata=test1))
 ```
 
 ```{r}
-XGBpred <- predict(xgb_mod, dtest)
-predictions_XGB <- exp(XGBpred) #need to reverse the log to the real values
-head(predictions_XGB)
-```
-
-```{r, out.width="100%"}
-#view variable importance plot
-library(Ckmeans.1d.dp) #required for ggplot clustering
-mat <- xgb.importance (feature_names = colnames(train1),model = xgb_mod)
-xgb.ggplot.importance(importance_matrix = mat[1:20], rel_to_first = TRUE)
-```
-
-##Averaging predictions
-
-Since the lasso and XGBoost algorithms are very different, averaging predictions likely improves the scores. As the lasso model does better regarding the cross validated RMSE score (0.1121 versus 0.1162), I am weigting the lasso model double.
-
-```{r}
-sub_avg <- data.frame(Id = test_labels, SalePrice = (predictions_XGB+2*predictions_lasso)/3)
-head(sub_avg)
-write.csv(sub_avg, file = 'average.csv', row.names = F)
+# submit
+submission <- data.frame(Id = test_labels, SalePrice=finalPredictions)
+head(submission)
+write.csv(submission, file = "submission.csv", row.names = F)
 ```
