@@ -1,5 +1,10 @@
 # File created by RStudio
 .Rhistory
+
 # Data folder
 specdata
 titanic
+
+# OSX
+.DS_Store
+

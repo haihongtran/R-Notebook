@@ -1,0 +1,59 @@
+---
+title: "Homework 3 - R Exercises"
+output: html_notebook
+---
+
+## Exercise 4. Decision Tree
+
+#### 4.1 Build and plot decision tree for GlaucomaM data set
+```{r}
+library("party")
+data("GlaucomaM", package = "TH.data") # Load data
+# Build decision tree for GlaucomaM data set
+gm_formula = Class ~ .
+gm_ctree = ctree(gm_formula, data = GlaucomaM)
+# Plot built tree
+plot(gm_ctree)
+```
+</br>
+
+#### 4.2 Show confusion matrix of the result of the decision tree
+```{r}
+gm_predict = predict(gm_ctree, GlaucomaM)
+table(gm_predict, GlaucomaM$Class)
+```
+</br>
+
+#### 4.3 Random forest algorithm
+```{r}
+# Build tree using random forest algorithm
+library("randomForest")
+gm_formula = Class ~ .
+gm_rf = randomForest(gm_formula, data=GlaucomaM, ntree=100, proximity=TRUE)
+# Plot error rate as number of trees grows
+plot(gm_rf)
+```
+</br>
+
+#### 4.4 Find out the most important variable for classification
+```{r}
+importance(gm_rf)
+varImpPlot(gm_rf)
+```
+Looking at the above graph, we can conclude that *vari* is the most important feature for classification.
+</br>
+
+## Exercise 5. Support Vector Machine (SVM)
+
+#### 5.1 Build an SVM model for iris data set
+```{r}
+library("e1071")
+iris_formula = Species ~ .
+iris_svm = svm(iris_formula, data = iris)
+```
+</br>
+
+#### 5.2 Plot decision boundary on "Petal.Width" and "Petal.Length"
+```{r}
+plot(iris_svm, iris, Petal.Width ~ Petal.Length, slice = list(Sepal.Width = 3, Sepal.Length = 4))
+```
