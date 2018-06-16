@@ -1805,6 +1805,7 @@ ggplot(data=all[!is.na(all$SalePrice),], aes(x=TotalPorchSF, y=SalePrice))+
 ##Add more features
 ```{r}
 all$soldHighSeason <- ifelse(all$MoSold %in% c(5,6,7), 1, 0)
+all$isRemodeledRecent <- ifelse(all$YearRemodAdd == all$YrSold, 1, 0)
 ```
 
 #Preparing data for modeling
