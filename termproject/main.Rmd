@@ -1807,6 +1807,7 @@ ggplot(data=all[!is.na(all$SalePrice),], aes(x=TotalPorchSF, y=SalePrice))+
 all$soldHighSeason <- ifelse(all$MoSold %in% c(5,6,7), 1, 0)
 all$isRemodeledRecent <- ifelse(all$YearRemodAdd == all$YrSold, 1, 0)
 all$averageRoomSizeAbvGrd <- all$GrLivArea / all$TotRmsAbvGrd
+all$bathRoomToRoomAbvGrd <- (all$FullBath + all$HalfBath * 0.5) / all$TotRmsAbvGrd
 ```
 
 #Preparing data for modeling
@@ -1837,7 +1838,7 @@ Before modeling I need to center and scale the 'true numeric' predictors (so not
 
 ```{r}
 numericVarNames <- numericVarNames[!(numericVarNames %in% c('MSSubClass', 'MoSold', 'YrSold', 'SalePrice', 'OverallQual', 'OverallCond'))] #numericVarNames was created before having done anything
-numericVarNames <- append(numericVarNames, c('Age', 'TotalPorchSF', 'TotBathrooms', 'TotalSqFeet', 'averageRoomSizeAbvGrd'))
+numericVarNames <- append(numericVarNames, c('Age', 'TotalPorchSF', 'TotBathrooms', 'TotalSqFeet', 'averageRoomSizeAbvGrd', 'bathRoomToRoomAbvGrd'))
 
 DFnumeric <- all[, names(all) %in% numericVarNames]
 
